@@ -1,0 +1,139 @@
+.container {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.dropZone {
+    margin-top: 2.5rem;
+    width: 85vw;
+    height: 40vh;
+    border: 1px solid gray;
+    border-radius: 0.7rem;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.title {
+    font-size: 35px;
+    font-weight: normal;
+    margin-left: 15px;
+}
+
+.asistencias {
+    margin: 0px auto;
+}
+
+.registerImage {
+    width: 32px;
+    height: 32px;
+}
+
+.registerText {
+    font-weight: normal;
+    padding: 2rem;
+    text-align: center;
+}
+
+.registerItem {
+    align-items: center;
+    margin-top: 1rem;
+    width: 85vw;
+    border: 1px solid gray;
+    border-radius: 0.7rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.imageContainer {
+    align-items: center;
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: row;
+}
+
+.registerimage {
+    width: 16px;
+    height: 16px;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.registerItem > button {
+    border: none;
+    background: none;
+    outline: none;
+}
+
+.registerItem > button:hover {
+    color:  darkcyan;
+}
+
+.registerAsistencias {
+    margin-top: 2rem;
+    width: 85vw;
+    height: 7vh;
+    border-radius: 7px;
+    color: white;
+    outline: none;
+    background-image: linear-gradient(315deg, #63d471 0%, #0a7533 74%);
+}
+
+.registerAsistencias:disabled {
+    opacity: 0.5;
+}
+
+.registerHeader {
+    width: 85vw;
+    height: 7vh;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    font-weight: normal;
+    font-size: 1.5rem;
+    border: 1px solid gray;
+    border-radius: 7px;
+}
+
+.registerHeader > h3 {
+    font-weight: normal;
+    font-size: 1.5rem;
+}
+
+.registerHEader {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    width: 85vw;
+    height: 7vh;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    font-weight: normal;
+    font-size: 1.5rem;
+    border: 1px solid gray;
+    border-radius: 7px;
+}
+
+.registerHEader > h3 {
+    font-weight: normal;
+    font-size: 1.5rem;
+}
+
+.registerBack {
+    margin-top: 0.5rem;
+    margin-bottom: 15rem;
+    width: 40vw;
+    height: 6vh;
+    border-radius: 7px;
+    color: white;
+    background-image: linear-gradient(315deg, #63d471 0%, #0a7533 74%);
+    border: 1px solid gray;
+    outline: none;
+    justify-items: right;
+}

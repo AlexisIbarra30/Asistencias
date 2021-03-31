@@ -1,0 +1,47 @@
+.top {
+    width: 100vw;
+    height: 5px;
+    background-image: linear-gradient(to right, green, gold);
+}
+
+.bottom {
+    width: 100vw;
+    height: 5px;
+    margin-top: 0.5rem;
+    background-image: linear-gradient(to left, green, gold);
+}
+
+.header {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+.header__container {
+    margin-top: 1rem;
+    width: 80vw;
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+}
+
+.header__container > img {
+    width: 230px;
+    height: auto;
+}
+
+.header__container > button {
+    border: none;
+    background: none;
+    font-size: 25px;
+    font-family: 'Blinker', sans-serif;
+    font-weight: bolds;
+}
+
+.headerBackground {
+    width: 100vh;
+    height: 15vh;
+    background: linear-gradient(to bottom, #2caa4c 37%, #e2e797 64%);
+    position: absolute;
+    z-index: -10;
+}

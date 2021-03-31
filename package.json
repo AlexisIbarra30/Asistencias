@@ -1,0 +1,38 @@
+{
+  "name": "indecision-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev-server": "webpack serve",
+    "build": "webpack --watch",
+    "build-babel": "babel src/app.js --out-file=public/scripts/app.js --presets='env,react' --watch"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "babel-core": "^6.26.3",
+    "babel-loader": "7.1",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "css-loader": "^5.0.1",
+    "history": "^4.10.1",
+    "moment": "^2.29.1",
+    "node-sass": "^5.0.0",
+    "normalize-css": "^2.3.1",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-modal": "^3.12.1",
+    "react-redux": "^7.2.3",
+    "react-router-dom": "^5.2.0",
+    "redux": "^4.0.5",
+    "sass-loader": "^10.1.1",
+    "style-loader": "^2.0.0",
+    "webpack": "^4.45.0",
+    "webpack-cli": "^4.3.1",
+    "webpack-dev-server": "^3.11.2",
+    "xlsx": "^0.16.9"
+  }
+}

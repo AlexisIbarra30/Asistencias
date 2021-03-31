@@ -1,0 +1,245 @@
+import React from 'react';
+import XLSX from 'xlsx';
+import moment from 'moment';
+import SingleFile from './SingleFile';
+import ListItem from './ListItems';
+
+export class RegisterPage extends React.Component {
+
+    state = {
+        arregloAsistencias: [],
+        asistencias: [],
+        archivos: [],
+        assistList: undefined,
+        alumnos: []
+    }
+
+    dropHandler = (ev) => {
+
+        ev.stopPropagation();
+        ev.preventDefault();
+
+        let files = ev.dataTransfer.files;
+        let i, f;
+
+        for (i = 0, f = files[i]; i < files.length; i++) {
+
+            this.setState((prevState) => ({
+                archivos: prevState.archivos.concat(f.name)
+            }))
+
+            const reader = new FileReader();
+
+            reader.onload = (e) => {
+
+                var data = e.target.result;
+
+                let workbook = XLSX.read(data, { type: 'binary' });
+                workbook = workbook.Sheets[workbook.SheetNames[0]];
+                const dat = XLSX.utils.sheet_to_json(workbook, { header: 1 })
+                this.setState(() => ({
+                    arregloAsistencias: dat
+                }));
+            };
+
+            reader.readAsBinaryString(f);
+        }
+    }
+
+    dragOverHandler = (e) => {
+        e.preventDefault();
+    }
+
+    //Calcula el tiempo que estuvo en la facultad
+    getDelay = (ant, sig) => {
+        if (moment(ant).date() - moment(sig).date() !== 0) {
+            //No checo entrada o salida
+            return [0]
+        } else if (Math.abs(moment(ant).hour() -
+            moment(sig).hour()) > 0) {
+            //Retorna las horas que estuvo en la facultad
+            return [Math.abs(moment(ant).hour() -
+                moment(sig).hour()), Math.abs(moment(ant).minutes() -
+                    moment(sig).minutes())]
+        }
+        return [0]
+    }
+
+    //Crea un array con las asistencias de cada alumno
+    getStudents = (array) => {
+        let aux = [];
+        const arrayAlumnos = []
+        for (let i = 0; i < array.length; i++) {
+            if (!!array[i + 1] && array[i][1] === array[i + 1][1]) {
+                aux.push(array[i])
+            } else {
+                aux.push(array[i]);
+                arrayAlumnos.push(aux);
+                aux = []
+            }
+        }
+        return arrayAlumnos;
+    }
+
+    //Ordena las fechas de cada arreglo de alumnos
+    getStudentsDate = (array) => {
+        let aux = []
+        const arrayAlumnos = []
+        array.forEach((alumnos) => {
+            aux = alumnos.sort((ant, sig) => {
+                if (moment(ant[0]).isBefore(moment(sig[0]))) {
+                    return -1
+                } else if (moment(ant[0]).isAfter(moment(sig[0]))) {
+                    return 1
+                }
+                return 0
+            })
+            arrayAlumnos.push(aux)
+        });
+        return arrayAlumnos
+    }
+
+    //Registra las asistencias de los alumnos
+    getAssist = (array) => {
+        let aux = []
+        const assists = []
+        //Recorremos los arreglos de alumnos 
+        array.forEach((alumnos) => {
+            //Recorremos los arreglos individuales
+            for (let i = 0; i < alumnos.length; i++) {
+                //Calculamos las asistencias de cada alumno
+                if (!!alumnos[i + 1] && this.getDelay(alumnos[i][0], alumnos[i + 1][0]).length > 1) {
+                    const horas = this.getDelay(alumnos[i][0], alumnos[i + 1][0]);
+                    //Registramos la asistencia
+                    aux.push([this.getHour(alumnos[i][0]), this.getHour(alumnos[i + 1][0]), alumnos[i][1],
+                    alumnos[i][2], alumnos[i][3], this.getDate(alumnos[i][0]),
+                    `${horas[0]}`])
+                }
+            }
+            assists.push(aux);
+            aux = []
+        })
+        return assists
+    };
+
+    ReaderHandler = () => {
+
+        //Ocultamos el dropZone
+        this.setState(() => ({
+            assistList: true
+        }))
+
+        // Obtenemos arreglo ordenado por ID
+        let arregloOrdenado = this.state.arregloAsistencias.slice();
+
+        // Eliminamos el encabezado de excel
+        arregloOrdenado.shift();
+
+        // Ordena array
+        arregloOrdenado = arregloOrdenado.sort((ant, sig) => ant[1] - sig[1]);
+
+        // Creamos un array por cada alumno ordenado por fechas
+        const students = this.getStudentsDate(this.getStudents(arregloOrdenado));
+
+        // Creamos un array con las asistencias y horas asistidas de cada alumno
+        const asistencias = this.getAssist(students)
+        console.log(asistencias)
+
+        // Salvamos las asistencias en el estado de la app
+        this.setState(() => ({
+            asistencias
+        }))
+
+        const aux = []
+        // Crea un arreglo unico de todas las asistencias
+        asistencias.forEach((listaAlumno) => {
+            if(listaAlumno.length > 0) {
+                listaAlumno.forEach((alumno) => {
+                    aux.push(alumno)
+                })
+            }
+        })
+
+        this.setState(() => ({
+            alumnos: aux
+        }))
+
+    }
+
+    // Separa la fecha de la hora
+    getDate = (date) => {
+        const fecha = date.split(' ');
+        return fecha[0];
+    }
+
+    getHour = (date) => {
+        const hour = date.split(' ');
+        return hour[1];
+    }
+
+    handleDelete = (index) => {
+        let archivos = this.state.archivos.slice();
+        archivos.splice(index, 1);
+        this.setState(() => ({
+            archivos
+        }))
+    }
+
+    handleBack = () => {
+        this.setState(() => ({
+            assistList: false
+        }))
+    }
+
+    render() {
+        return (
+            <div>
+                <h1 className='title'> Registro de Asistencia </h1>
+                <div className='container'>
+                    {
+                        !!this.state.assistList ? (
+                            <div>
+                                <div className='registerHeader'>
+                                    <h3> ID </h3>
+                                    <h3> Nombre </h3>
+                                    <h3> Fecha </h3>
+                                    <h3> Hora Entrada </h3>
+                                    <h3> Hora Salida </h3>
+                                    <h3> Horas Asistidas </h3>
+                                </div>
+                                {
+                                    // Renderizamos las asistencias
+                                    this.state.alumnos.map((asistencia, index) => (
+                                        <ListItem
+                                            key={index}
+                                            id={asistencia[2]}
+                                            nombre={asistencia[3]}
+                                            fecha={asistencia[5]}
+                                            horaI={asistencia[0]}
+                                            horaF={asistencia[1]}
+                                            horas={asistencia[6]}
+                                        />
+                                    ))
+                                }
+                                <button  onClick={this.handleBack} className='registerBack'> Regresar </button>
+                            </div>) : (
+                            <div>
+                                <div
+                                    className='dropZone'
+                                    onDrop={this.dropHandler}
+                                    onDragOver={this.dragOverHandler}>
+                                    <img className='registerImage' src='./images/doc.png' />
+                                    <h2 className='registerText'> Arrastre sus archivos aqui para agregarlos al registro </h2>
+                                </div>
+                                {this.state.archivos.map((name, index) => (
+                                    <SingleFile key={index} name={name} index={index} handleDelete={this.handleDelete} />
+                                ))}
+                                <button disabled={this.state.archivos.length === 0} className='registerAsistencias' onClick={this.ReaderHandler}> Lista de Asistencias </button>
+                            </div>
+                        )
+                    }
+                </div>
+            </div>
+        )
+    }
+}
