@@ -21,12 +21,11 @@ export class RegisterPage extends React.Component {
 
         let files = ev.dataTransfer.files;
         let i, f;
-
         for (i = 0, f = files[i]; i < files.length; i++) {
 
             this.setState((prevState) => ({
                 archivos: prevState.archivos.concat(f.name)
-            }))
+            }));
 
             const reader = new FileReader();
 
@@ -187,8 +186,51 @@ export class RegisterPage extends React.Component {
 
     handleBack = () => {
         this.setState(() => ({
-            assistList: false
+            assistList: false,
+            alumnos:[],
+            arregloAsistencias: [],
+            asistencias: [],
+            archivos: []
         }))
+    }
+
+    //Guarda los registros en la BD
+    guardaBD = () => {
+        //Corregir para enviar json con arreglo completo para evitar mas de una promesa
+        const url="https://localhost/PAGINAS/backendIHM/asistencias.php";
+        var contador=0;
+        var contador2=0;
+
+        this.state.alumnos.map((asistencia,index)=>{
+            let datos={
+                "nombre":asistencia[3],
+                "apellidos":asistencia[4],
+                "fecha":asistencia[5],
+                "hora_entrada":asistencia[0],
+                "hora_salida":asistencia[1],
+                "horas_permanencia":asistencia[6]
+            }
+            fetch(url,{
+                method:'POST',
+                body:JSON.stringify(datos)
+            })
+            .then(res=>res.text())
+            .then(
+                (data)=>{
+                    console.log(data);
+                    if(data==="Ya existe el registro"){
+                        this.setState({
+                            contador:contador+1
+                        });
+                    }else{
+                        this.setState({
+                            contador2:contador2+1
+                        });
+                    }
+                }
+            )
+        });
+
     }
 
     render() {
@@ -207,6 +249,7 @@ export class RegisterPage extends React.Component {
                                     <h3> Hora Salida </h3>
                                     <h3> Horas Asistidas </h3>
                                 </div>
+                                <div className="tablaScroll">
                                 {
                                     // Renderizamos las asistencias
                                     this.state.alumnos.map((asistencia, index) => (
@@ -221,7 +264,11 @@ export class RegisterPage extends React.Component {
                                         />
                                     ))
                                 }
+                                </div>
+                                <div className="btnBox">
                                 <button  onClick={this.handleBack} className='registerBack'> Regresar </button>
+                                <button  onClick={this.guardaBD} className='registerBack'> Guardar Registros</button>
+                                </div>
                             </div>) : (
                             <div>
                                 <div
