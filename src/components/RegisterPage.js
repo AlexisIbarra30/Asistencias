@@ -194,13 +194,28 @@ export class RegisterPage extends React.Component {
         }))
     }
 
+    //loader para carga de archivos
+    loader=(espera)=>{
+
+        this.setState(()=>{
+            btnInactivo:espera
+        });
+        document.querySelector("#btn1").disabled = espera;
+        document.querySelector("#btn2").disabled = espera;
+
+        if(espera){    
+            document.body.style.cursor = 'progress'; //cursos espera
+        }else{
+            document.body.style.cursor = 'default'; //cursos default
+        }
+    }
     //Guarda los registros en la BD
     guardaBD = () => {
-        //Corregir para enviar json con arreglo completo para evitar mas de una promesa
-        const url="https://localhost/PAGINAS/backendIHM/asistencias.php";
-        var contador=0;
-        var contador2=0;
 
+        this.loader(true); //Mostramos cursor loader
+        const url="http://localhost/PAGINAS/backendIHM/asistencias.php";
+        var json = [];
+        //Generamos json con todos los registros            
         this.state.alumnos.map((asistencia,index)=>{
             let datos={
                 "nombre":asistencia[3],
@@ -210,27 +225,28 @@ export class RegisterPage extends React.Component {
                 "hora_salida":asistencia[1],
                 "horas_permanencia":asistencia[6]
             }
-            fetch(url,{
+            json.push(datos);
+            
+            
+        });
+        //Enviamos json al servidor
+        fetch(url,{
                 method:'POST',
-                body:JSON.stringify(datos)
+                body:JSON.stringify(json)
             })
-            .then(res=>res.text())
+            .then(res=>res.json())
             .then(
                 (data)=>{
-                    console.log(data);
-                    if(data==="Ya existe el registro"){
-                        this.setState({
-                            contador:contador+1
-                        });
-                    }else{
-                        this.setState({
-                            contador2:contador2+1
-                        });
-                    }
+                    var mensaje="";
+                    if(data['nuevos']==0){
+                        mensaje = `No se agregaron registros nuevos. Posibles archivos ya cargados anteriormente. Repetidos: ${data['repetidos']}`;
+                    }else if(data['nuevos']!=0){
+                        mensaje = `Terminado: registros nuevos: ${data['nuevos']}, repetidos: ${data['repetidos']},errores: ${data['errores']}`
+                    }   
+                    this.loader(false); //Quitamos cursor loader
+                    alert(mensaje);
                 }
-            )
-        });
-
+            );
     }
 
     render() {
@@ -266,8 +282,8 @@ export class RegisterPage extends React.Component {
                                 }
                                 </div>
                                 <div className="btnBox">
-                                <button  onClick={this.handleBack} className='registerBack'> Regresar </button>
-                                <button  onClick={this.guardaBD} className='registerBack'> Guardar Registros</button>
+                                <button  onClick={this.handleBack} className='registerBack' id="btn1"> Regresar </button>
+                                <button  onClick={this.guardaBD} className='registerBack'id="btn2"> Guardar Registros</button>
                                 </div>
                             </div>) : (
                             <div>
