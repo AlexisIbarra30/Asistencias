@@ -1,0 +1,97 @@
+.menu-navegacion{
+    background-image: linear-gradient(315deg, #63d471 0%, #0a7533 74%);
+    align-self: left;
+    display: flex;
+    align-items: center;
+}
+
+.menu-item{
+    padding:1em;
+    color:#fff;
+    display: flex;
+    cursor:pointer;
+}
+
+.menu-item:hover{
+    background-color: rgba(255,255,255,0.2);
+}
+
+.panel{
+    width:90%;
+    margin-top:1em;
+    padding:1em;
+    border:0.1em dotted #999;
+    display: flex;
+    justify-content: center;
+
+}
+
+//Estilos para formularios de Administrador
+.formAddUser{
+    display: flex;
+    flex-direction: column;
+    width:40%;
+    margin-left:5%;
+    justify-content: space-between;
+    min-height: 55vh;
+}
+.nomargin{
+    margin:0;
+    width:40%;
+}
+.smallbtn{
+    width:100%;
+    display: flex;
+    justify-content: space-around;
+    margin:0.5em 0;
+
+}
+.form-item{
+    display: flex;
+    justify-content: space-between;
+}
+.formAddUser h3{
+    width:100%;
+    text-align: center;
+}
+.formAddUser input[type=text],.formAddUser input[type=password],.formAddUser label{
+    padding:0.5em;
+}
+.radios{
+    display: flex;
+    justify-content: space-between;
+}
+.radios .radio-item{
+    padding:0.5em 0;
+}
+
+.formModifUser{
+    min-height: 65vh;
+    display: flex;
+    flex-direction: column;
+    
+}
+.form-header{
+    margin-bottom:2em;
+}
+.modifuser{
+    width:100%;
+    margin:0;
+}
+
+.formDelUser{
+    width:50%;
+}
+
+.formDelUser h3{
+    width:100%;
+    text-align: center;
+}
+.formDelUser .buscaUser{
+    display: flex;
+    justify-content: space-between  ;
+}
+.formDelUser label{
+    display: flex;
+    align-items: center;
+}
