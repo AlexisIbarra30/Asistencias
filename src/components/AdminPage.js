@@ -6,7 +6,17 @@ import FormListUser from './AdminComponents/FormListUser';
 import FormModifUser from './AdminComponents/FormModifUser';
 import FormDelUser from './AdminComponents/FormDelUser';
 
-export class AdminPage extends React.Component{
+export class AdminPage extends React.Component {
+
+    state = {
+        renderComponent: FormAddUser
+    }
+
+    renderHandler = (renderComponent) => {
+        this.setState(() => ({
+            renderComponent
+        }));
+    }
 
     render(){
         return(
@@ -15,18 +25,29 @@ export class AdminPage extends React.Component{
                 <h1 className='title'> Panel de Administrador </h1>
                 <div className='container'>
                     <nav className="menu-navegacion">
-                        <MenuItem titulo="Agregar Usuario"/>
-                        <MenuItem titulo="Listar Usuarios"/>
-                        <MenuItem titulo="Modificar Usuario"/>
-                        <MenuItem titulo="Eliminar Usuario"/>
+                        <MenuItem onClick={() => {
+                            console.log('hola')
+                            this.renderHandler(FormAddUser)
+                        }} titulo="Agregar Usuario"/>
+                        <MenuItem onClick={() => {
+                            console.log('hola')
+                            this.renderHandler(FormListUser)
+                        }} titulo="Listar Usuarios"/>
+                        <MenuItem onClick={() => {
+                            console.log('hola')
+                            this.renderHandler(FormModifUser)
+                        }} titulo="Modificar Usuario"/>
+                        <MenuItem onClick={() => {
+                            console.log('hola')
+                            this.renderHandler(FormDelUser)
+                        }} titulo="Eliminar Usuario"/>
                     </nav>
+                    
                     <div className='panel' id="panel">
-                        <FormAddUser/>
+                        <this.state.renderComponent/>
                     </div>
                 </div>
             </div>
         );
     }
-
-
 }
