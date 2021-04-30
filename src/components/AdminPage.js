@@ -25,24 +25,11 @@ export class AdminPage extends React.Component {
                 <h1 className='title'> Panel de Administrador </h1>
                 <div className='container'>
                     <nav className="menu-navegacion">
-                        <MenuItem onClick={() => {
-                            console.log('hola')
-                            this.renderHandler(FormAddUser)
-                        }} titulo="Agregar Usuario"/>
-                        <MenuItem onClick={() => {
-                            console.log('hola')
-                            this.renderHandler(FormListUser)
-                        }} titulo="Listar Usuarios"/>
-                        <MenuItem onClick={() => {
-                            console.log('hola')
-                            this.renderHandler(FormModifUser)
-                        }} titulo="Modificar Usuario"/>
-                        <MenuItem onClick={() => {
-                            console.log('hola')
-                            this.renderHandler(FormDelUser)
-                        }} titulo="Eliminar Usuario"/>
+                        <MenuItem renderHandler={this.renderHandler} Component={FormAddUser} titulo="Agregar Usuario"/>
+                        <MenuItem renderHandler={this.renderHandler} Component={FormListUser} titulo="Listar Usuarios"/>
+                        <MenuItem renderHandler={this.renderHandler} Component={FormModifUser} titulo="Modificar Usuario"/>
+                        <MenuItem renderHandler={this.renderHandler} Component={FormDelUser} titulo="Eliminar Usuario"/>
                     </nav>
-                    
                     <div className='panel' id="panel">
                         <this.state.renderComponent/>
                     </div>
