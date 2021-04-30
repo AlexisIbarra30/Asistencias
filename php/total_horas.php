@@ -3,9 +3,9 @@
 
     header('Access-Control-Allow-Origin:*');
     header('Content-Type:application/json');
-
+    
     $con=conectar();
-    $query="SELECT nombre,apellidos,SEC_TO_TIME(SUM(TIME_TO_SEC(horas_permanencia))) as total_horas from asistencias where fecha BETWEEN '".$_GET['fecha_inicio']."' and '".$_GET['fecha_fin']."' group by nombre";
+    $query="SELECT nombre,apellidos,SEC_TO_TIME(SUM(TIME_TO_SEC(horas_permanencia))) as total_horas from asistencias where fecha BETWEEN '".$_GET['fecha_inicio']."' and '".$_GET['fecha_fin']."' and nombre like'".$_GET['nombre']."' and apellidos like '".$_GET['apellidos']."'";
     $res = mysqli_query($con,$query);
     //Generamos JSON
     if(mysqli_num_rows($res)==0){
