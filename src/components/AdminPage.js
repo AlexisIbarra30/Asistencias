@@ -5,6 +5,7 @@ import FormAddUser from './AdminComponents/FormAddUser';
 import FormListUser from './AdminComponents/FormListUser';
 import FormModifUser from './AdminComponents/FormModifUser';
 import FormDelUser from './AdminComponents/FormDelUser';
+import Footer from './Footer';
 
 export class AdminPage extends React.Component{
 
@@ -24,6 +25,7 @@ export class AdminPage extends React.Component{
                         <FormAddUser/>
                     </div>
                 </div>
+                <Footer/>
             </div>
         );
     }
