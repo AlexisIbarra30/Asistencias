@@ -9,9 +9,11 @@
 	 		$query = "select nombre,apellidos from asistencias group by nombre";
 	 		$res=mysqli_query($con,$query);
             $json= array();
-            
+
             while($fila=mysqli_fetch_assoc($res))
                 $json[] = $fila;
+
+            mysqli_close($con);
             echo json_encode($json);
 	 	break;
 

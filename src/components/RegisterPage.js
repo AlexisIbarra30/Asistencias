@@ -3,6 +3,7 @@ import XLSX from 'xlsx';
 import moment from 'moment';
 import SingleFile from './SingleFile';
 import ListItem from './ListItems';
+import Header from './Header';
 
 export class RegisterPage extends React.Component {
 
@@ -252,6 +253,7 @@ export class RegisterPage extends React.Component {
     render() {
         return (
             <div>
+                <Header/>
                 <h1 className='title'> Registro de Asistencia </h1>
                 <div className='container'>
                     {

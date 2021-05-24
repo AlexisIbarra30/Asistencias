@@ -24,7 +24,7 @@
                     if(mysqli_num_rows($res)==0){
                         //El registro no existe, lo inserta
                         $query="INSERT INTO asistencias(nombre,apellidos,fecha,hora_entrada,hora_salida,horas_permanencia)";
-                        $query=$query."values('".$reg['nombre']."','".$reg['apellidos']."','".$reg['fecha']."','".$reg['hora_entrada']."','".$reg['hora_salida']."','".$reg['horas_permanencia'].":00');";
+                        $query=$query."values('".$reg['nombre']."','".$reg['apellidos']."','".$reg['fecha']."','".$reg['hora_entrada']."','".$reg['hora_salida']."','".$reg['horas_permanencia']."')";
                         mysqli_query($con,$query);
                         $nuevos = $nuevos+1;
 
