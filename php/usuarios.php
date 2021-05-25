@@ -63,7 +63,6 @@
 			break;
 
 		case 'GET':
-			$_GET = json_decode(file_get_contents('php://input'),true);
 
 			if(isset($_GET['usuario']) and isset($_GET['password']) and isset($_GET['tipo_usuario'])){
 				//Validar usuario para login: devolver {valido:true/false}

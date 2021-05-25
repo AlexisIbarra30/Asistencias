@@ -1,5 +1,4 @@
 import React from 'react';
-import axios from 'axios';
 import history from 'history';
 
 export default class LoginPage extends React.Component {
@@ -30,20 +29,17 @@ export default class LoginPage extends React.Component {
     authUser = () => {
 
         // Envolvemos los datos en un JSON
-        const json = {
+        const json = new URLSearchParams({
             usuario: this.state.user,
             password: this.state.password,
             tipo_usuario: this.state.userRole
-        };
-
+        });
+        const url = `http://localhost/PAGINAS/backendIHM/usuarios.php?${json.toString()}`;
+        console.log(url);
         // Lanzamos los datos al servidor
-        fetch(`http://localhost/php/authUser.php`, {
-            method: 'POST',
+        fetch(url, {
+            method: 'GET',
             mode: 'cors',
-            body: JSON.stringify(json),
-            headers: {
-                'Content-Type': 'application/json'
-            }
         })
             .then(res => res.json())
             .catch(error => {
