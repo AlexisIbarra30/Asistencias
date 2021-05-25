@@ -29,31 +29,33 @@ export default class LoginPage extends React.Component {
 
     authUser = () => {
 
-        // Envolvemos los datos en un JSON
-        const json = {
-            usuario: this.state.user,
-            password: this.state.password,
-            tipo_usuario: this.state.userRole
-        };
+        history.push("/admin");
 
-        // Lanzamos los datos al servidor
-        fetch(`http://localhost/php/authUser.php`, {
-            method: 'POST',
-            mode: 'cors',
-            body: JSON.stringify(json),
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
-            .then(res => res.json())
-            .catch(error => {
-                console.log('Error', error)
-            })
-            .then(response => {
-                // Si existe error lo mostramos en pantalla
-                console.log('hola paco');
-                console.log(response);
-            });
+        // // Envolvemos los datos en un JSON
+        // const json = {
+        //     usuario: this.state.user,
+        //     password: this.state.password,
+        //     tipo_usuario: this.state.userRole
+        // };
+
+        // // Lanzamos los datos al servidor
+        // fetch(`http://localhost/php/authUser.php`, {
+        //     method: 'POST',
+        //     mode: 'cors',
+        //     body: JSON.stringify(json),
+        //     headers: {
+        //         'Content-Type': 'application/json'
+        //     }
+        // })
+        //     .then(res => res.json())
+        //     .catch(error => {
+        //         console.log('Error', error)
+        //     })
+        //     .then(response => {
+        //         // Si existe error lo mostramos en pantalla
+        //         console.log('hola paco');
+        //         console.log(response);
+        //     });
     }
 
     render() {

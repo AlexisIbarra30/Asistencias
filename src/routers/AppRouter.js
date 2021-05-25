@@ -10,6 +10,7 @@ const AppRouter = () => (
     <Router history={history}>
         <Switch>
             <Route exact path='/' component={LoginPage} />
+            <Route path='/admin' component={AdminPage} />
         </Switch>
     </Router>
 );
