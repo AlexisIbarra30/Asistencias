@@ -20,20 +20,37 @@
 .header__container {
     margin-top: 1rem;
     width: 80vw;
-    align-items: center;
+    display: flex;
+    flex-flow: column;
+}
+
+.header_logos{
+    width:100%;
     display: flex;
     justify-content: space-between;
 }
 
-.header__container > img {
-    width: 230px;
-    height: auto;
+.header_session{
+    display: flex;
+    justify-content: space-between;
 }
 
-.header__container > button {
+.header__container .header_logos  img {
+    width: 230px;
+}
+
+.header__container .header_session  button {
     border: none;
     background: none;
-    font-size: 25px;
+    font-size: 20px;
+    font-family: 'Blinker', sans-serif;
+    font-weight: bolds;
+    
+}
+
+.header_session .current_user{
+    justify-self: center;
+    font-size: 20px;
     font-family: 'Blinker', sans-serif;
     font-weight: bolds;
 }
