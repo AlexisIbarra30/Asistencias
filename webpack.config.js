@@ -19,7 +19,8 @@ module.exports = {
     },
     devtool: 'eval-source-map',
     devServer: {
-        contentBase: path.resolve(__dirname, 'public')
+        contentBase: path.resolve(__dirname, 'public'),
+        historyApiFallback: true
       } 
 };
 

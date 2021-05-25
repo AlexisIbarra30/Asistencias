@@ -3,7 +3,7 @@ import React from 'react';
 const SingleFile = (props) => (
     <div className='registerItem'>
         <div className='imageContainer'>
-            <img className='registerimage' src='./images/doc.png' />
+            <img className='registerimage' src='./images/fileIcon.svg' />
             <p className='loginText'> {props.name} </p>
         </div>
         <button onClick={ () => {

@@ -1,11 +1,10 @@
 import React from 'react';
 import XLSX from 'xlsx';
 import moment from 'moment';
-import SingleFile from './SingleFile';
+import SingleFile from '../SingleFile';
 import ListItem from './ListItems';
-import Header from './Header';
 
-export class RegisterPage extends React.Component {
+export default class RegisterPage extends React.Component {
 
     state = {
         arregloAsistencias: [],
@@ -214,7 +213,7 @@ export class RegisterPage extends React.Component {
     guardaBD = () => {
 
         this.loader(true); //Mostramos cursor loader
-        const url="http://localhost/PAGINAS/backendIHM/asistencias.php";
+        const url="http://localhost/php/asistencias.php";
         var json = [];
         //Generamos json con todos los registros            
         this.state.alumnos.map((asistencia,index)=>{
@@ -253,7 +252,6 @@ export class RegisterPage extends React.Component {
     render() {
         return (
             <div>
-                <Header/>
                 <h1 className='title'> Registro de Asistencia </h1>
                 <div className='container'>
                     {
@@ -293,7 +291,7 @@ export class RegisterPage extends React.Component {
                                     className='dropZone'
                                     onDrop={this.dropHandler}
                                     onDragOver={this.dragOverHandler}>
-                                    <img className='registerImage' src='./images/doc.png' />
+                                    <img src='./images/excel.svg' />
                                     <h2 className='registerText'> Arrastre sus archivos aqui para agregarlos al registro </h2>
                                 </div>
                                 {this.state.archivos.map((name, index) => (
