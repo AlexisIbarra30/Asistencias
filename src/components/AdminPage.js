@@ -7,7 +7,7 @@ import FormModifUser from './AdminComponents/FormModifUser';
 import FormDelUser from './AdminComponents/FormDelUser';
 import Footer from './Footer';
 
-export class AdminPage extends React.Component {
+export default class AdminPage extends React.Component {
 
     state = {
         renderComponent: FormAddUser
@@ -22,7 +22,7 @@ export class AdminPage extends React.Component {
     render(){
         return(
             <div>
-                <Header/>
+                <Header />
                 <h1 className='title'> Panel de Administrador </h1>
                 <div className='container'>
                     <nav className="menu-navegacion">

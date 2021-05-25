@@ -1,7 +1,7 @@
 const path = require('path');
 
 module.exports = {
-    mode: 'production',
+    mode: 'development',
     entry: './src/app.js',
     output: {
         path: path.resolve(__dirname, 'public'),
@@ -17,7 +17,7 @@ module.exports = {
             use: ['style-loader', 'css-loader', 'sass-loader']
         }]
     },
-    devtool: 'eval-cheap-module-source-map',
+    devtool: 'eval-source-map',
     devServer: {
         contentBase: path.resolve(__dirname, 'public')
       } 

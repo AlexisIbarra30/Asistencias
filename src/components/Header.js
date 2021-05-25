@@ -5,7 +5,7 @@ const Header = () => (
         <div className='header'>
             <div className='header__container'>
                 <img src='./images/logo.png'/>
-                <button>Cerrar sesión</button>
+                <button><img src='./images/logout.svg' /></button>
             </div>  
         </div>
         <div className='bottom'></div>
