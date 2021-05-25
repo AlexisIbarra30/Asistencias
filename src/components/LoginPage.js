@@ -1,5 +1,4 @@
 import React from 'react';
-import axios from 'axios';
 import history from 'history';
 
 export default class LoginPage extends React.Component {
@@ -29,6 +28,7 @@ export default class LoginPage extends React.Component {
 
     authUser = () => {
 
+<<<<<<< HEAD
         history.push("/admin");
 
         // // Envolvemos los datos en un JSON
@@ -56,6 +56,30 @@ export default class LoginPage extends React.Component {
         //         console.log('hola paco');
         //         console.log(response);
         //     });
+=======
+        // Envolvemos los datos en un JSON
+        const json = new URLSearchParams({
+            usuario: this.state.user,
+            password: this.state.password,
+            tipo_usuario: this.state.userRole
+        });
+        const url = `http://localhost/PAGINAS/backendIHM/usuarios.php?${json.toString()}`;
+        console.log(url);
+        // Lanzamos los datos al servidor
+        fetch(url, {
+            method: 'GET',
+            mode: 'cors',
+        })
+            .then(res => res.json())
+            .catch(error => {
+                console.log('Error', error)
+            })
+            .then(response => {
+                // Si existe error lo mostramos en pantalla
+                console.log('hola paco');
+                console.log(response);
+            });
+>>>>>>> 1f1f16c6764402dc6383ba9bdeaf3492761817d4
     }
 
     render() {
