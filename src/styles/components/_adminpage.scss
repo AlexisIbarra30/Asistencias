@@ -32,7 +32,7 @@
     width:40%;
     margin-left:5%;
     justify-content: space-between;
-    min-height: 40vh;
+    min-height: 50vh;
 }
 .nomargin{
     margin:0;
@@ -54,7 +54,7 @@
     text-align: center;
 }
 .formAddUser input[type=text],.formAddUser input[type=password],.formAddUser label{
-    padding:0;
+    padding:0.2em;
 }
 .radios{
     display: flex;

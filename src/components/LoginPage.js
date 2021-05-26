@@ -34,7 +34,7 @@ export default class LoginPage extends React.Component {
             password: this.state.password,
             tipo_usuario: this.state.userRole
         });
-        const url = `http://localhost:8000/php/usuarios.php?${json.toString()}`;
+        const url = `http://localhost/PAGINAS/backendIHM/usuarios.php?${json.toString()}`;
         console.log(url)
         // Lanzamos los datos al servidor
         fetch(url, {
@@ -75,12 +75,12 @@ export default class LoginPage extends React.Component {
                             <p className='loginText'>Tipo de usuario: </p>
                             <div className="radios">
                                 <div className="radio-item">
-                                    <input onClick={() => { this.handleTypeUser(0) }} type="radio" value="0" name="tipo-usuario"></input>
+                                    <input onClick={() => { this.handleTypeUser(0) }} type="radio" value="0" name="tipo-usuario" defaultChecked></input>
                                     <label>Usuario</label>
                                 </div>
 
                                 <div className="radio-item">
-                                    <input onClick={() => { this.handleTypeUser(0) }} type="radio" value="1" name="tipo-usuario"></input>
+                                    <input onClick={() => { this.handleTypeUser(1) }} type="radio" value="1" name="tipo-usuario"></input>
                                     <label>Administardor</label>
                                 </div>
                             </div>
