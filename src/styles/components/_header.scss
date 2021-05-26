@@ -30,29 +30,18 @@
     justify-content: space-between;
 }
 
-.header_session{
-    display: flex;
-    justify-content: space-between;
-}
 
 .header__container .header_logos  img {
-    width: 230px;
+    height:3em;
 }
 
-.header__container .header_session  button {
+.header__container{
     border: none;
     background: none;
     font-size: 20px;
     font-family: 'Blinker', sans-serif;
     font-weight: bolds;
     
-}
-
-.header_session .current_user{
-    justify-self: center;
-    font-size: 20px;
-    font-family: 'Blinker', sans-serif;
-    font-weight: bolds;
 }
 
 .headerBackground {

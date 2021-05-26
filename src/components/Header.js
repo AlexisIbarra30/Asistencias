@@ -5,15 +5,13 @@ const Header = () => (
         <div className='header'>
             <div className='header__container'>
                 <div class="header_logos">
-                    <img src='./images/logo.png'/>
-                    <img src='./images/fingenieria-min.png'/>
+                    <a href="https://www.uaemex.mx/">
+                        <img src='./images/logo.png'/>
+                    </a>
+                    <a href="http://fingenieria.uaemex.mx/portal/inicio/home.php">
+                        <img src='./images/fingenieria-min.png'/>
+                    </a>
                 </div>
-                <div class="header_session">
-                    <span class="current_user">Bienvenido: </span>
-                    <button>Cerrar sesión</button>
-                </div>
-                
-                
             </div>  
         </div>
         <div className='bottom'></div>

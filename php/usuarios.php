@@ -49,9 +49,9 @@
 					}
 
 					mysqli_query($con,$query);
-					echo json_encode("correcto");	
+					echo ("correcto");	
 				}else{
-					echo json_encode('usuario repetido');
+					echo ('usuario repetido');
 				}
 
 				
@@ -64,11 +64,10 @@
 
 		case 'GET':
 
-			if(isset($_GET['usuario']) and isset($_GET['password']) and isset($_GET['tipo_usuario'])){
+			if(isset($_GET['usuario']) and isset($_GET['password'])){
 				//Validar usuario para login: devolver {valido:true/false}
 				$con = conectar();
-				$query = "select * from usuarios where usuario='".$_GET['usuario']."' and password ='".$_GET['password'].
-				"' and tipo_usuario='".$_GET['tipo_usuario']."'";
+				$query = "select * from usuarios where usuario='".$_GET['usuario']."' and password ='".$_GET['password']."'";
 				$json = array();
 
 				$res = mysqli_query($con,$query);
@@ -77,7 +76,14 @@
 					//No existe el usuario
 					$json = array("valido"=>false);
 				}else{
-					$json = array("valido"=>true);
+					//Existe el usuario, devuelve nombre, apellidos y valido=true
+					while($fila=mysqli_fetch_array($res)){
+						$nombre = $fila['nombre'];
+						$apellidos = $fila['apellidos'];
+						$tipo_usuario = $fila['tipo_usuario'];
+						$valido=true;
+						$json[] = array("nombre"=>$nombre,"apellidos"=>$apellidos,"tipo_usuario"=>$tipo_usuario,"valido"=>$valido);
+					}
 				}
 				mysqli_close($con);
 				echo json_encode($json);
