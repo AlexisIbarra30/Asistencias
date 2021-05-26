@@ -51,7 +51,14 @@
 					mysqli_query($con,$query);
 					echo ("correcto");	
 				}else{
-					echo ('usuario repetido');
+					if(isset($_POST['id'])){
+						//Si viene el id, significa que se actualiza el registro
+						$query = "UPDATE usuarios SET nombre= '".$_POST['nombre']."',apellidos='".$_POST['apellidos']."',usuario = '".$_POST['usuario']."',password='".$_POST['password']."', tipo_usuario = ".$_POST['tipo_usuario']." where id=".$_POST['id'];
+						echo ("correcto");	
+					}else{
+						//si no viene el id, se inserta nuevo registro
+						echo ("registro reperido");
+					}
 				}
 
 				
@@ -94,12 +101,12 @@
 				$query = "DELETE from usuarios where id=".$_GET['id'];
 				mysqli_query($con,$query);
 				mysqli_close($con);
-				echo json_encode('Borrado: ID'.$_GET['id']);
+				echo('correcto');
 			}
 			else{
 				//Si no viene ninguna variable, devolver todos los usuarios
 				$con = conectar();
-				$query ="SELECT id,nombre,apellidos,usuario,tipo_usuario from usuarios";
+				$query ="SELECT id,nombre,apellidos,usuario,tipo_usuario,password from usuarios";
 				$json = array();
 
 				$res = mysqli_query($con,$query);
