@@ -34,7 +34,7 @@ export default class LoginPage extends React.Component {
             password: this.state.password,
             tipo_usuario: this.state.userRole
         });
-        const url = `http://localhost:8000/php/usuarios.php?${json.toString()}`;
+        const url = `http://localhost:8000/PAGINAS/IHM/usuarios.php?${json.toString()}`;
         console.log(url)
         // Lanzamos los datos al servidor
         fetch(url, {
