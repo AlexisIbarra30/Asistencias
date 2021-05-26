@@ -8,7 +8,7 @@ class ReportesPage extends React.Component {
 
     state = {
         alumnos: [],
-        startDate: moment().subtract(1, 'week'),
+        startDate: moment().subtract(2, 'year'),
         endDate: moment(),
         focusedInput: null,
         fchI: undefined,
@@ -41,7 +41,7 @@ class ReportesPage extends React.Component {
             fecha_inicio,
             fecha_fin
         });
-        let url = `http://localhost:8000/PAGINAS/backendIHM/total_horas.php?${json.toString()}`;
+        let url = `http://localhost/PAGINAS/backendIHM/total_horas.php?${json.toString()}`;
         console.log(url)
         // Lanzamos el fetch para obtener la lista de alumnos
         fetch(url, {
@@ -97,17 +97,44 @@ class ReportesPage extends React.Component {
             height
         );
         
+        //fondo: #2D5438
+        //texto: #FFFFFF
+        doc.setFontSize(18);
         doc.text(`Cordinacion de Estudios Avanzados`, 50,50);
         doc.text(`Registro de asistencias, de ${this.state.fchI} hasta ${this.state.fchF}`, 30,60);
-        doc.cell(5, 70, 200, 300,'  Nombre        Apellidos            Fecha Inicio      Fecha Final      Horas Totales  ', 5)
-        y = 90
-
+        doc.setFontSize(10);
+        //doc.cell(5, 70, 200, 300,'  Nombre        Apellidos            Fecha Inicio      Fecha Final      Horas Totales  ', 1);
+        doc.cell(15,70,45,10,'Nombre',5,'c');
+        doc.cell(15,70,45,10,'Apellidos',5,'c');
+        doc.cell(15,70,30,10,'Fecha Inicio',5,'c');
+        doc.cell(15,70,30,10,'Fecha Final',5,'c');
+        doc.cell(15,70,30,10,'Horas Totales',5,'c');
+        y = 90;
+        doc.setFontSize(9);
         this.state.alumnos.forEach((asistencia, index) => {
-            doc.text(`  ${asistencia.nombre}    ${asistencia.apellidos}    ${this.state.fchI}     ${this.state.fchF}      ${asistencia.total_horas}`, 5, y);
+          /*  doc.text(`  ${asistencia.nombre}    ${asistencia.apellidos}    ${this.state.fchI}     ${this.state.fchF}      ${asistencia.total_horas}`, 5, y);
             y = y +10;
             if(index > 18) {
                 return false;
+            }*/
+            var temp_y = 70;
+            if(index>0 && index%20==0){doc.cellAddPage();temp_y = 10;
+                doc.setFontSize(10);
+                doc.cell(15,temp_y,45,10,'Nombre',5,'c');
+                doc.cell(15,temp_y,45,10,'Apellidos',5,'c');
+                doc.cell(15,temp_y,30,10,'Fecha Inicio',5,'c');
+                doc.cell(15,temp_y,30,10,'Fecha Final',5,'c');
+                doc.cell(15,temp_y,30,10,'Horas Totales',5,'c');
+                doc.setFontSize(9);
             }
+            doc.cell(15,temp_y,45,8,`${asistencia.nombre}`,index,y);
+            doc.cell(15,temp_y,45,8,`${asistencia.apellidos}`,index,y);
+            doc.cell(15,temp_y,30,8,`${this.state.fchI}`,index,y);
+            doc.cell(15,temp_y,30,8,`${this.state.fchF}`,index,y);
+            doc.cell(15,temp_y,30,8,`${asistencia.total_horas}`,index,y);
+            y = y +10;
+            
+            
         });
 
         doc.save("Asistencias.pdf");
@@ -165,7 +192,7 @@ class ReportesPage extends React.Component {
                                     key={123}
                                     nombre={"No se encontro "}
                                     apellidos={"ningun registro, "}
-                                    fecha_inicio={"prueve cambiando "}
+                                    fecha_inicio={"pruebe cambiando "}
                                     fecha_fin={"la fecha."}
                                 />)
                             }
