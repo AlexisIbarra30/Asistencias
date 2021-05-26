@@ -28,7 +28,6 @@ export default class UserPage extends React.Component {
                         <MenuItem renderHandler={this.renderHandler} Component={RegisterPage} titulo="Cargar Archivo Asistencias" />
                         <MenuItem renderHandler={this.renderHandler} Component={FormAddAssist} titulo="Registrar Asistencia" />
                         <MenuItem renderHandler={this.renderHandler} Component={ReportesPage} titulo="Generar Reportes" />
-                        <MenuItem  titulo="Eliminar Registros" />
                     </nav>
                     <div className='Panel'>
                         <this.state.renderComponent/>

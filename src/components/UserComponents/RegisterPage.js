@@ -152,7 +152,7 @@ export default class RegisterPage extends React.Component {
         const aux = []
         // Crea un arreglo unico de todas las asistencias
         asistencias.forEach((listaAlumno) => {
-            if(listaAlumno.length > 0) {
+            if (listaAlumno.length > 0) {
                 listaAlumno.forEach((alumno) => {
                     aux.push(alumno)
                 })
@@ -187,7 +187,7 @@ export default class RegisterPage extends React.Component {
     handleBack = () => {
         this.setState(() => ({
             assistList: false,
-            alumnos:[],
+            alumnos: [],
             arregloAsistencias: [],
             asistencias: [],
             archivos: []
@@ -195,17 +195,17 @@ export default class RegisterPage extends React.Component {
     }
 
     //loader para carga de archivos
-    loader=(espera)=>{
+    loader = (espera) => {
 
-        this.setState(()=>{
-            btnInactivo:espera
+        this.setState(() => {
+            btnInactivo: espera
         });
         document.querySelector("#btn1").disabled = espera;
         document.querySelector("#btn2").disabled = espera;
 
-        if(espera){    
+        if (espera) {
             document.body.style.cursor = 'progress'; //cursos espera
-        }else{
+        } else {
             document.body.style.cursor = 'default'; //cursos default
         }
     }
@@ -213,36 +213,36 @@ export default class RegisterPage extends React.Component {
     guardaBD = () => {
 
         this.loader(true); //Mostramos cursor loader
-        const url="http://localhost/PAGINAS/backendIHM/asistencias.php";
+        const url = "http://localhost/PAGINAS/backendIHM/asistencias.php";
         var json = [];
         //Generamos json con todos los registros            
-        this.state.alumnos.map((asistencia,index)=>{
-            let datos={
-                "nombre":asistencia[3],
-                "apellidos":asistencia[4],
-                "fecha":asistencia[5],
-                "hora_entrada":asistencia[0],
-                "hora_salida":asistencia[1],
-                "horas_permanencia":asistencia[6]
+        this.state.alumnos.map((asistencia, index) => {
+            let datos = {
+                "nombre": asistencia[3],
+                "apellidos": asistencia[4],
+                "fecha": asistencia[5],
+                "hora_entrada": asistencia[0],
+                "hora_salida": asistencia[1],
+                "horas_permanencia": asistencia[6]
             }
             json.push(datos);
-            
-            
+
+
         });
         //Enviamos json al servidor
-        fetch(url,{
-                method:'POST',
-                body:JSON.stringify(json)
-            })
-            .then(res=>res.json())
+        fetch(url, {
+            method: 'POST',
+            body: JSON.stringify(json)
+        })
+            .then(res => res.json())
             .then(
-                (data)=>{
-                    var mensaje="";
-                    if(data['nuevos']==0){
+                (data) => {
+                    var mensaje = "";
+                    if (data['nuevos'] == 0) {
                         mensaje = `No se agregaron registros nuevos. Posibles archivos ya cargados anteriormente. Repetidos: ${data['repetidos']}`;
-                    }else if(data['nuevos']!=0){
+                    } else if (data['nuevos'] != 0) {
                         mensaje = `Terminado: registros nuevos: ${data['nuevos']}, repetidos: ${data['repetidos']},errores: ${data['errores']}`
-                    }   
+                    }
                     this.loader(false); //Quitamos cursor loader
                     alert(mensaje);
                 }
@@ -266,24 +266,24 @@ export default class RegisterPage extends React.Component {
                                     <h3> Horas Asistidas </h3>
                                 </div>
                                 <div className="tablaScroll">
-                                {
-                                    // Renderizamos las asistencias
-                                    this.state.alumnos.map((asistencia, index) => (
-                                        <ListItem
-                                            key={index}
-                                            id={asistencia[2]}
-                                            nombre={asistencia[3]}
-                                            fecha={asistencia[5]}
-                                            horaI={asistencia[0]}
-                                            horaF={asistencia[1]}
-                                            horas={asistencia[6]}
-                                        />
-                                    ))
-                                }
+                                    {
+                                        // Renderizamos las asistencias
+                                        this.state.alumnos.map((asistencia, index) => (
+                                            <ListItem
+                                                key={index}
+                                                id={asistencia[2]}
+                                                nombre={asistencia[3]}
+                                                fecha={asistencia[5]}
+                                                horaI={asistencia[0]}
+                                                horaF={asistencia[1]}
+                                                horas={asistencia[6]}
+                                            />
+                                        ))
+                                    }
                                 </div>
                                 <div className="btnBox">
-                                <button  onClick={this.handleBack} className='registerBack' id="btn1"> Regresar </button>
-                                <button  onClick={this.guardaBD} className='registerBack'id="btn2"> Guardar Registros</button>
+                                    <button onClick={this.handleBack} className='registerBack' id="btn1"> Regresar </button>
+                                    <button onClick={this.guardaBD} className='registerBack' id="btn2"> Guardar Registros</button>
                                 </div>
                             </div>) : (
                             <div>

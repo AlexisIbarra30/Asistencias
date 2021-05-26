@@ -1,4 +1,6 @@
 import React from 'react';
+import {history} from '../routers/AppRouter';
+
 
 export default class LoginPage extends React.Component {
 
@@ -27,15 +29,13 @@ export default class LoginPage extends React.Component {
 
     authUser = () => {
 
-        history.pushState(null,null,"/admin");
         // Envolvemos los datos en un JSON
         const json = new URLSearchParams({
             usuario: this.state.user,
             password: this.state.password,
-            tipo_usuario: this.state.userRole
         });
-        const url = `http://localhost/PAGINAS/backendIHM/usuarios.php?${json.toString()}`;
-        console.log(url)
+        const url = `http://localhost:8000/PAGINAS/backendIHM/usuarios.php?${json.toString()}`;
+        console.log(url);
         // Lanzamos los datos al servidor
         fetch(url, {
             method: 'GET',
@@ -46,9 +46,29 @@ export default class LoginPage extends React.Component {
                 console.log('Error', error)
             })
             .then(response => {
-                // Si existe error lo mostramos en pantalla
-                console.log('hola paco');
-                console.log(response);
+                const user = response[0];
+                //Usuario comun
+                if(user.valido === true && user.tipo_usuario === "0") {
+                    //Guardamos en el localStorage el usuario
+                    localStorage.setItem("USER", JSON.stringify({"nombre": user.nombre, "apellidos": user.apellidos }))
+                    history.push("/user");
+                }else {
+                    // Administrador
+                    if(user.valido === true && user.tipo_usuario === "1") {
+                        //Guardamos en el localStorage el usuario
+                        localStorage.setItem("USER", JSON.stringify({"nombre": user.nombre, "apellidos": user.apellidos }))
+                        history.push("/admin");
+                    }else {
+                        this.setState(() => ({
+                            error: "Usuario y/o contraseña incorrecto"
+                        }));
+                        setTimeout(() => {
+                            this.setState(() => ({
+                                error: undefined
+                            }));
+                        }, 3000)
+                    }
+                }
             });
     }
 
@@ -73,17 +93,6 @@ export default class LoginPage extends React.Component {
                             <p className='loginText'> Contraseña </p>
                             <input onChange={this.onPasswordChange} value={this.state.password} className='loginInput' type='password' />
                             <p className='loginText'>Tipo de usuario: </p>
-                            <div className="radios">
-                                <div className="radio-item">
-                                    <input onClick={() => { this.handleTypeUser(0) }} type="radio" value="0" name="tipo-usuario" defaultChecked></input>
-                                    <label>Usuario</label>
-                                </div>
-
-                                <div className="radio-item">
-                                    <input onClick={() => { this.handleTypeUser(1) }} type="radio" value="1" name="tipo-usuario"></input>
-                                    <label>Administardor</label>
-                                </div>
-                            </div>
                             <button onClick={this.authUser} className='loginButton'> Acceder </button>
                         </div>
                     </div>

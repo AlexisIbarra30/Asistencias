@@ -5,12 +5,10 @@
     
     /*
         Parametros GET: 
-
         fecha_inicio : primer fecha dentro del rango
         fecha_fin: ultima fecha dentro del rango
         nombre: nombre(s) del usuario a buscar
         apellidos: apellidos del usuario a buscar
-
         Para buscar por nombre se requiere que tanto nombre y apellidos esten definidos. Caso contrario devolverá todos los nombres
     */
 
@@ -33,7 +31,8 @@
             $res = mysqli_query($con,$query);
             //Generamos JSON
             if(mysqli_num_rows($res)==0){
-                echo "Sin registros";
+                $json = array();
+                echo json_encode($json);
             }else{
                 $json= array();
                 while($fila=mysqli_fetch_assoc($res))

@@ -5,7 +5,7 @@ import LoginPage from '../components/LoginPage';
 import AdminPage from '../components/AdminPage';
 import UserPage from '../components/UserPage';
 
-const history = createBrowserHistory();
+export const history = createBrowserHistory();
 
 const AppRouter = () => (
     <Router history={history}>

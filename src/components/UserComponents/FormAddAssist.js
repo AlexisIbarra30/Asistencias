@@ -22,11 +22,16 @@ class FormAddAssist extends React.Component {
 
         // Lanzamos el fetch para obtener la lista de alumnos
 
-        fetch('http://localhost:8000/getStudents')
+        fetch('http://localhost:8000/PAGINAS/backendIHM/alumnos.php',{
+            method: 'GET',
+            mode: 'cors'     
+        })
             .then(response => response.json())
+            .catch(error => {
+                console.log('Error', error)
+            })
             .then(data => {
-                console.log(data.Students);
-                this.setState(() => ({ alumnos: data.Students }))
+                this.setState(() => ({alumnos: data}))
             });
     }
 

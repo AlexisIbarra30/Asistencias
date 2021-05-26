@@ -108,9 +108,7 @@
                 	$json[] = $fila;
                 mysqli_close($con);
                 echo json_encode($json);
-
 			}
 			break;
-		
 	}
 ?>
