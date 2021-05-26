@@ -92,7 +92,6 @@ export default class LoginPage extends React.Component {
                             <input onChange={this.onUserChange} value={this.state.user} className='loginInput' type='text' />
                             <p className='loginText'> Contraseña </p>
                             <input onChange={this.onPasswordChange} value={this.state.password} className='loginInput' type='password' />
-                            <p className='loginText'>Tipo de usuario: </p>
                             <button onClick={this.authUser} className='loginButton'> Acceder </button>
                         </div>
                     </div>

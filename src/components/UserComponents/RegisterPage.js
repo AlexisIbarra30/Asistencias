@@ -213,8 +213,9 @@ export default class RegisterPage extends React.Component {
     guardaBD = () => {
 
         this.loader(true); //Mostramos cursor loader
-        const url = "http://localhost/PAGINAS/backendIHM/asistencias.php";
+        const url = "http://localhost:8000/PAGINAS/backendIHM/asistencias.php";
         var json = [];
+        console.log(this.state.alumnos);
         //Generamos json con todos los registros            
         this.state.alumnos.map((asistencia, index) => {
             let datos = {

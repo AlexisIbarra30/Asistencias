@@ -8,7 +8,7 @@ export class FormListUser extends React.Component{
     }
 
     getUsers = ()=>{
-        const url = 'http://localhost/PAGINAS/backendIHM/usuarios.php';
+        const url = 'http://localhost:8000/PAGINAS/backendIHM/usuarios.php';
         fetch(url,{
             method:'GET',
             mode:'cors'

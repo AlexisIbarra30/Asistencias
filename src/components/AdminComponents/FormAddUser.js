@@ -47,7 +47,7 @@ export class FormAddUser extends React.Component{
         if(json.nombre.trim()=="" || json.apellidos.trim()=="" || json.usuario.trim()==""||json.password.trim()==""||json.tipo_usuario.trim()==""){
             alert("Por favor no dejar campos en blanco");
         }else{
-            const url = 'http://localhost/PAGINAS/backendIHM/usuarios.php';
+            const url = 'http://localhost:8000/PAGINAS/backendIHM/usuarios.php';
             fetch(url,{
                 method:'POST',
                 body: JSON.stringify(json)

@@ -8,7 +8,7 @@ export class FormModifUser extends React.Component{
     }
 
     getUsers = ()=>{
-        const url = 'http://localhost/PAGINAS/backendIHM/usuarios.php';
+        const url = 'http://localhost:8000/PAGINAS/backendIHM/usuarios.php';
         fetch(url,{
             method:'GET',
             mode:'cors'
@@ -24,7 +24,7 @@ export class FormModifUser extends React.Component{
     }
 
     eliminarUser=()=>{
-        const url = 'http://localhost/PAGINAS/backendIHM/usuarios.php?id='+this.state.sendId;
+        const url = 'http://localhost:8000/PAGINAS/backendIHM/usuarios.php?id='+this.state.sendId;
         fetch(url,{
             method:'GET',
             mode:'cors'

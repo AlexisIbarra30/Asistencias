@@ -13,7 +13,7 @@ export class FormModifUser extends React.Component{
     }
 
     getUsers = ()=>{
-        const url = 'http://localhost/PAGINAS/backendIHM/usuarios.php';
+        const url = 'http://localhost:8000/PAGINAS/backendIHM/usuarios.php';
         fetch(url,{
             method:'GET',
             mode:'cors'
@@ -80,7 +80,7 @@ export class FormModifUser extends React.Component{
             id:this.state.sendId
         }
     
-            const url = 'http://localhost/PAGINAS/backendIHM/usuarios.php';
+            const url = 'http://localhost:8000/PAGINAS/backendIHM/usuarios.php';
             fetch(url,{
                 method:'POST',
                 body: JSON.stringify(json)

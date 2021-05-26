@@ -157,8 +157,8 @@ class ReportesPage extends React.Component {
                                         nombre={asistencia.nombre}
                                         apellidos={asistencia.apellidos}
                                         total_horas={asistencia.total_horas}
-                                        fecha_inicio={moment(this.state.cadena, "DD MM YY")._i}
-                                        fecha_fin={moment(this.state.endDate, "DD MM YY")._i}
+                                        fecha_inicio={this.state.fchI}
+                                        fecha_fin={this.state.fchF}
                                     />
                                 ))) : // Si no hay registros
                                 (<ListItemReportes
