@@ -150,7 +150,7 @@ class ReportesPage extends React.Component {
                 <div className='panel123'>
                     <div className='container'>
                         <div className="form-Item">
-                            <label>Seleccione el rango en que seran <br /> generados los reportes: </label>
+                            <label style={{margin: 5}}> Rango en que seran generados: </label>
                             <DateRangePicker
                                 startDate={this.state.startDate} // momentPropTypes.momentObj or null,
                                 startDateId="start_date_id" // PropTypes.string.isRequired,
@@ -164,6 +164,7 @@ class ReportesPage extends React.Component {
                                 onFocusChange={focusedInput => this.setState({ focusedInput })} // PropTypes.func.isRequired,
                                 isOutsideRange={() => false}
                                 noBorder={true}
+                                readOnly={true}
                             />
                         </div>
                         <div className='registerHeader reg regHeader'>

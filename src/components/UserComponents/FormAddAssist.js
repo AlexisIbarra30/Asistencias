@@ -12,7 +12,7 @@ class FormAddAssist extends React.Component {
         hora_salida: "12:00:00",
         nombre: undefined,
         apellidos: undefined,
-        horas_permanencia: 10000
+        horas_permanencia: 1
     }
 
     onDateChange = (date) => {
@@ -102,6 +102,7 @@ class FormAddAssist extends React.Component {
 
     onHourChange = (e) => {
         const horas_permanencia = e.target.value
+        console.log(horas_permanencia);
         this.setState(() => ({horas_permanencia}))
     }
 
@@ -134,14 +135,15 @@ class FormAddAssist extends React.Component {
                                 noBorder={true}
                                 enableOutsideDays={true}
                                 isOutsideRange={() => false}
+                                readOnly={true}
                             />
                         </div>
                         <div className="form-item">
                             <label>Seleccione las <br />horas asistidas: </label>
-                            <select name="user-to-del" className='horas' >
+                            <select onChange={this.onHourChange} name="user-to-del" className='horas' >
                                 {[1, 2, 3, 4, 5, 6, 7, 8].map((horas, index) => {
                                     return (
-                                        <option value={`${horas}0000`} key={index}>{`${horas}`}</option>
+                                        <option value={`${horas}`} key={index}>{`${horas}`}</option>
                                     );
                                 })}
                             </select>
