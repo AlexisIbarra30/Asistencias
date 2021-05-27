@@ -41,7 +41,7 @@ class ReportesPage extends React.Component {
             fecha_inicio,
             fecha_fin
         });
-        let url = `http://localhost/PAGINAS/backendIHM/total_horas.php?${json.toString()}`;
+        let url = `http://localhost:8000/PAGINAS/backendIHM/total_horas.php?${json.toString()}`;
         console.log(url)
         // Lanzamos el fetch para obtener la lista de alumnos
         fetch(url, {
