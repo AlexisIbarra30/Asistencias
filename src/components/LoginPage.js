@@ -1,6 +1,6 @@
 import React from 'react';
 import {history} from '../routers/AppRouter';
-
+import * as constantes from './Constantes';
 
 export default class LoginPage extends React.Component {
 
@@ -27,36 +27,40 @@ export default class LoginPage extends React.Component {
         this.setState(() => ({ password }))
     }
 
+
     authUser = () => {
 
         // Envolvemos los datos en un JSON
-        const json = new URLSearchParams({
+        const json ={
             usuario: this.state.user,
             password: this.state.password,
-        });
-        const url = `http://localhost:8000/PAGINAS/backendIHM/usuarios.php?${json.toString()}`;
+        };
+
+        const url = `${constantes.PATH_API}login.php`;
         console.log(url);
         // Lanzamos los datos al servidor
         fetch(url, {
-            method: 'GET',
+            method: 'POST',
             mode: 'cors',
+            body: JSON.stringify(json)
         })
             .then(res => res.json())
             .catch(error => {
                 console.log('Error', error)
             })
             .then(response => {
+                console.log(response);
                 const user = response[0];
                 //Usuario comun
                 if(user.valido === true && user.tipo_usuario === "0") {
                     //Guardamos en el localStorage el usuario
-                    localStorage.setItem("USER", JSON.stringify({"nombre": user.nombre, "apellidos": user.apellidos }))
+                    sessionStorage.setItem("USER", JSON.stringify({"id":user.id,"nombre": user.nombre, "apellidos": user.apellidos,"programa":user.programa_nombre, "programa_id":user.programa_id}))
                     history.push("/user");
                 }else {
                     // Administrador
                     if(user.valido === true && user.tipo_usuario === "1") {
                         //Guardamos en el localStorage el usuario
-                        localStorage.setItem("USER", JSON.stringify({"nombre": user.nombre, "apellidos": user.apellidos }))
+                        sessionStorage.setItem("USER", JSON.stringify({"id":user.id,"nombre": user.nombre, "apellidos": user.apellidos,"programa":user.programa_nombre,  "programa_id":user.programa_id}))
                         history.push("/admin");
                     }else {
                         this.setState(() => ({
@@ -72,12 +76,17 @@ export default class LoginPage extends React.Component {
             });
     }
 
+    
+
     render() {
         return (
             <div>
                 <div className='loginContainer'>
-                    <img src='./images/logo.png' className='loginImage' />
-                    <h1 className='loginTitle'> Iniciar sesión </h1>
+                    <a href = "https://www.uaemex.mx/" target="_blank">
+                        <img src='./images/logo.png' className='loginImage' />
+                    </a>
+                    <h2 className='loginTitle'>Sistema de Registro de Asistencia</h2>
+                    <h3 className='loginTitle'> Iniciar sesión </h3>
                     {!!!this.state.error ? (
                         <div></div>
                     ) : (
@@ -96,6 +105,7 @@ export default class LoginPage extends React.Component {
                         </div>
                     </div>
                 </div>
+                
             </div>
         );
     }

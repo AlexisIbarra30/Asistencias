@@ -3,6 +3,7 @@ import moment from 'moment';
 import { DateRangePicker } from 'react-dates';
 import jsPDF from 'jspdf';
 import ListItemReportes from './ListItemsReportes';
+import * as constantes from '../Constantes';
 
 class ReportesPage extends React.Component {
 
@@ -37,11 +38,16 @@ class ReportesPage extends React.Component {
             fchF: fecha_fin
         }));
 
+        let user = JSON.parse(sessionStorage.getItem("USER"));
+        let programa = user.programa_id;
+
         let json = new URLSearchParams({
             fecha_inicio,
-            fecha_fin
+            fecha_fin,
+            programa
         });
-        let url = `http://localhost:8000/PAGINAS/backendIHM/total_horas.php?${json.toString()}`;
+        
+        let url = `${constantes.PATH_API}total_horas.php?${json.toString()}`;
         console.log(url)
         // Lanzamos el fetch para obtener la lista de alumnos
         fetch(url, {
@@ -147,10 +153,12 @@ class ReportesPage extends React.Component {
                 <div className='titleContainer'>
                     <h1 className='title'> Reportes </h1>
                 </div>
+                <span style={{margin:10}}>** Solamente se muestran a los alumnos que pertenecen a la maestria/doctorador</span>
+
                 <div className='panel123'>
                     <div className='container'>
                         <div className="form-Item">
-                            <label style={{margin: 5}}> Rango en que seran generados: </label>
+                            <label style={{margin: 30}}> Rango en que seran generados: </label>
                             <DateRangePicker
                                 startDate={this.state.startDate} // momentPropTypes.momentObj or null,
                                 startDateId="start_date_id" // PropTypes.string.isRequired,

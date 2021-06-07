@@ -1,0 +1,29 @@
+.form-container{
+    display: flex;
+    flex-direction: column;
+    width:70%;
+    padding:1em;
+}
+.form-container h3{
+    width:100%;
+    text-align: center;
+}
+
+.form-container .seccion .seccion-item input{
+    margin:0.5em;
+    padding:0.2em;
+    width:40%;
+}
+.seccion-item{
+    margin-left:1.5em;
+}
+
+.seccion-item .subtitulo{
+    margin-left:2em;
+    padding-right: 16em;
+    font-weight: bold;
+}
+.seccion .buttons{
+    width:40%;
+    margin: 1em 30%;
+}

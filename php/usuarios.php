@@ -29,7 +29,7 @@
 			$_POST = json_decode(file_get_contents('php://input'),true);
 			$json = array();
 
-			if(isset($_POST['nombre']) and isset($_POST['apellidos']) and isset($_POST['usuario']) and isset($_POST['password']) and isset($_POST['tipo_usuario'])){
+			if(isset($_POST['nombre']) and isset($_POST['apellidos']) and isset($_POST['usuario']) and isset($_POST['password']) and isset($_POST['tipo_usuario']) and isset($_POST['programa'])){
 				$con = conectar();
 
 				//verificamos que no exista ya el usuario (ver si no se repite el nombre o el usuario)
@@ -45,7 +45,7 @@
 						$query = "UPDATE usuarios SET nombre= '".$_POST['nombre']."',apellidos='".$_POST['apellidos']."',usuario = '".$_POST['usuario']."',password='".$_POST['password']."', tipo_usuario = ".$_POST['tipo_usuario']." where id=".$_POST['id'];
 					}else{
 						//si no viene el id, se inserta nuevo registro
-						$query = "INSERT INTO usuarios (nombre,apellidos,usuario,password,tipo_usuario) VALUES ('".$_POST['nombre']."','".$_POST['apellidos']."','".$_POST['usuario']."','".$_POST['password']."','".$_POST['tipo_usuario']."')";
+						$query = "INSERT INTO usuarios (nombre,apellidos,usuario,password,tipo_usuario,programa) VALUES ('".$_POST['nombre']."','".$_POST['apellidos']."','".$_POST['usuario']."','".$_POST['password']."','".$_POST['tipo_usuario']."','".$_POST['programa']."')";
 					}
 
 					mysqli_query($con,$query);
@@ -53,7 +53,7 @@
 				}else{
 					if(isset($_POST['id'])){
 						//Si viene el id, significa que se actualiza el registro
-						$query = "UPDATE usuarios SET nombre= '".$_POST['nombre']."',apellidos='".$_POST['apellidos']."',usuario = '".$_POST['usuario']."',password='".$_POST['password']."', tipo_usuario = ".$_POST['tipo_usuario']." where id=".$_POST['id'];
+						$query = "UPDATE usuarios SET nombre= '".$_POST['nombre']."',apellidos='".$_POST['apellidos']."',usuario = '".$_POST['usuario']."',password='".$_POST['password']."', tipo_usuario = '".$_POST['tipo_usuario']."' where id=".$_POST['id'];
 						echo ("correcto");	
 					}else{
 						//si no viene el id, se inserta nuevo registro
@@ -88,8 +88,9 @@
 						$nombre = $fila['nombre'];
 						$apellidos = $fila['apellidos'];
 						$tipo_usuario = $fila['tipo_usuario'];
+						$programa = $fila['programa'];
 						$valido=true;
-						$json[] = array("nombre"=>$nombre,"apellidos"=>$apellidos,"tipo_usuario"=>$tipo_usuario,"valido"=>$valido);
+						$json[] = array("nombre"=>$nombre,"apellidos"=>$apellidos,"tipo_usuario"=>$tipo_usuario,"programa"=>$programa,"valido"=>$valido);
 					}
 				}
 				mysqli_close($con);
@@ -106,13 +107,14 @@
 			else{
 				//Si no viene ninguna variable, devolver todos los usuarios
 				$con = conectar();
-				$query ="SELECT id,nombre,apellidos,usuario,tipo_usuario,password from usuarios";
+				$query ="SELECT usuarios.id as id,nombre,apellidos,usuario,programa_nombre,password from usuarios inner join programas where programas.id = usuarios.programa";
 				$json = array();
 
 				$res = mysqli_query($con,$query);
 
 				while($fila=mysqli_fetch_assoc($res))
                 	$json[] = $fila;
+                
                 mysqli_close($con);
                 echo json_encode($json);
 

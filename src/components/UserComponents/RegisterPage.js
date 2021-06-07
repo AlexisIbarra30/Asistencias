@@ -3,6 +3,7 @@ import XLSX from 'xlsx';
 import moment from 'moment';
 import SingleFile from '../SingleFile';
 import ListItem from './ListItems';
+import * as constantes from '../Constantes';
 
 export default class RegisterPage extends React.Component {
 
@@ -13,6 +14,8 @@ export default class RegisterPage extends React.Component {
         assistList: undefined,
         alumnos: []
     }
+
+ 
 
     dropHandler = (ev) => {
 
@@ -213,12 +216,13 @@ export default class RegisterPage extends React.Component {
     guardaBD = () => {
 
         this.loader(true); //Mostramos cursor loader
-        const url = "http://localhost:8000/PAGINAS/backendIHM/asistencias.php";
+        const url = `${constantes.PATH_API}asistencias.php`;
         var json = [];
         console.log(this.state.alumnos);
         //Generamos json con todos los registros            
         this.state.alumnos.map((asistencia, index) => {
             let datos = {
+                "id":asistencia[2],
                 "nombre": asistencia[3],
                 "apellidos": asistencia[4],
                 "fecha": asistencia[5],
@@ -240,11 +244,12 @@ export default class RegisterPage extends React.Component {
                 (data) => {
                     var mensaje = "";
                     if (data['nuevos'] == 0) {
-                        mensaje = `No se agregaron registros nuevos. Posibles archivos ya cargados anteriormente. Repetidos: ${data['repetidos']}`;
+                        mensaje = `Las asistencias que quiere registrar ya existen en la base de datos.`;
                     } else if (data['nuevos'] != 0) {
-                        mensaje = `Terminado: registros nuevos: ${data['nuevos']}, repetidos: ${data['repetidos']},errores: ${data['errores']}`
+                        mensaje = `Terminado: Se agregaron ${data['nuevos']} asistencias, con : ${data['repetidos']} registros repetidos`;
                     }
                     this.loader(false); //Quitamos cursor loader
+                    
                     alert(mensaje);
                 }
             );

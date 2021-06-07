@@ -1,4 +1,5 @@
 import React from 'react';
+import * as constantes from '../Constantes';
 
 export class FormModifUser extends React.Component{
     
@@ -12,15 +13,17 @@ export class FormModifUser extends React.Component{
         sendId:""
     }
 
-    getUsers = ()=>{
-        const url = 'http://localhost:8000/PAGINAS/backendIHM/usuarios.php';
+    componentDidMount = ()=>{
+        const url = `${constantes.PATH_API}usuarios.php`;
         fetch(url,{
             method:'GET',
             mode:'cors'
         }).then(response => response.json())
         .then(data=>{
-            this.setState(()=>({usuarios:data}));
+            this.setState(()=>({usuarios:data}))
+            
         });
+        
     }
 
 
@@ -79,8 +82,11 @@ export class FormModifUser extends React.Component{
             tipo_usuario:this.state.tipo_usuario,
             id:this.state.sendId
         }
-    
-            const url = 'http://localhost:8000/PAGINAS/backendIHM/usuarios.php';
+        
+        if(json.nombre.trim()=="" || json.apellidos.trim()=="" || json.usuario.trim()==""||json.password.trim()==""){
+            alert("Por favor no dejar campos en blanco");
+        }else{
+            const url = `${constantes.PATH_API}usuarios.php`;
             fetch(url,{
                 method:'POST',
                 body: JSON.stringify(json)
@@ -97,10 +103,10 @@ export class FormModifUser extends React.Component{
                 }
 
             );
+        }
     }
 
     render(){
-        this.getUsers();
         return(
             <div className="formModifUser">
                 <div className="form-header">

@@ -55,7 +55,7 @@
 .headerLogout {
     position: absolute;
     top: 70px;
-    left: 55vw;
+    right: 5vw;
     height: 75px;
     display: flex;
     justify-content: flex-end;
@@ -73,6 +73,7 @@
     flex-direction: row;
     justify-content: space-between;
     margin-left: 20px;
+    cursor: pointer;
 }
 
 .headerImages {

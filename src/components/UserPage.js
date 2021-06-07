@@ -6,6 +6,7 @@ import RegisterPage from './UserComponents/RegisterPage';
 import FormAddAssist from './UserComponents/FormAddAssist';
 import ReportesPage from './UserComponents/ReportesPage';
 import Footer from './Footer';
+import {history} from '../routers/AppRouter';
 
 export default class UserPage extends React.Component {
 
@@ -19,7 +20,16 @@ export default class UserPage extends React.Component {
         }));
     }
 
+    valida_sesion=()=>{
+        let user = JSON.parse(sessionStorage.getItem("USER"));
+        if(user==null){
+            history.push('/');
+            location.reload();
+        }
+    }
+
     render() {
+        {this.valida_sesion()}
         return (
             <div>
                 <Header />
@@ -35,6 +45,7 @@ export default class UserPage extends React.Component {
                     </div>
                 </div>
                 <Footer />
+                
             </div>
         );
     }

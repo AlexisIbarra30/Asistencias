@@ -1,5 +1,5 @@
 import React from 'react';
-
+import * as constantes from '../Constantes';
 
 export class FormListUser extends React.Component{
 
@@ -7,8 +7,8 @@ export class FormListUser extends React.Component{
         usuarios:[]
     }
 
-    getUsers = ()=>{
-        const url = 'http://localhost:8000/PAGINAS/backendIHM/usuarios.php';
+    componentDidMount = ()=>{
+        const url = `${constantes.PATH_API}usuarios.php`;
         fetch(url,{
             method:'GET',
             mode:'cors'
@@ -20,7 +20,6 @@ export class FormListUser extends React.Component{
     
 
     render(){
-        this.getUsers();
         return(
             <div className="formListUser">
                 <h3>Lista de Usuarios </h3>
@@ -30,6 +29,7 @@ export class FormListUser extends React.Component{
                         <h4> Nombre </h4>
                         <h4> Apellidos </h4>
                         <h4> Nombre de Usuario </h4>
+                        <h4> Programa</h4>
                     </div>
                     <div className="tablaScroll"> 
                         {this.state.usuarios.map(
@@ -40,6 +40,7 @@ export class FormListUser extends React.Component{
                                             <h3> {user.nombre} </h3>
                                             <h3> {user.apellidos} </h3>
                                             <h3> {user.usuario} </h3>
+                                            <h3> {user.programa_nombre} </h3>
                                         </div>
                                     );
                                 }

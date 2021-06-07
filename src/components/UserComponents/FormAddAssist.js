@@ -1,6 +1,7 @@
 import React from 'react';
 import moment from 'moment';
 import { SingleDatePicker } from 'react-dates';
+import * as constantes from '../Constantes';
 
 class FormAddAssist extends React.Component {
 
@@ -28,10 +29,16 @@ class FormAddAssist extends React.Component {
     }
 
     componentDidMount() {
-
+        let user = JSON.parse(sessionStorage.getItem("USER"));
+        let programa = user.programa_id;
+        let json = new URLSearchParams({
+            programa
+        });
+        
+        let url = `${constantes.PATH_API}alumnos.php?${json.toString()}`;
         // Lanzamos el fetch para obtener la lista de alumnos
 
-        fetch('http://localhost:8000/PAGINAS/backendIHM/alumnos.php', {
+        fetch(url, {
             method: 'GET',
             mode: 'cors'
         })
@@ -51,45 +58,54 @@ class FormAddAssist extends React.Component {
         console.log(this.state.date);
         let cadena = JSON.stringify(moment(this.state.date._d, "YYYY-MM-DD")._i);
         cadena = cadena.split("T");
-        cadena = JSON.stringify(cadena[0]).split("\"")
-        let fecha_inicio = cadena[2]
+        cadena = JSON.stringify(cadena[0]).split("\"");
+        let fecha_inicio = cadena[2];
 
         // Direccion a donde va a ir la solicitud
-        const url = "http://localhost:8000/PAGINAS/backendIHM/asistencias.php";
+        const url = `${constantes.PATH_API}addAssist.php`;
 
-        // Empaquetado de los datos
-        let datos = {
-            "nombre": this.state.nombre,
-            "apellidos": this.state.apellidos,
-            "fecha": fecha_inicio,
-            "hora_entrada": this.state.hora_entrada,
-            "hora_salida": this.state.hora_salida,
-            "horas_permanencia": this.state.horas_permanencia
-        }
+        //Validamos que la fecha no sea mayor a la actual antes de agregar asistencia
+        var fecha_actual = moment();
+        if(fecha_actual < this.state.date){
+            alert("No puede ingresar asistencias en fechas futuras");
+        }else{
+            let user = JSON.parse(sessionStorage.getItem("USER"));
+            // Empaquetado de los datos
+            let datos = {
+                "nombre": this.state.nombre,
+                "apellidos": this.state.apellidos,
+                "fecha": fecha_inicio,
+                "hora_entrada": this.state.hora_entrada,
+                "hora_salida": this.state.hora_salida,
+                "horas_permanencia": this.state.horas_permanencia,
+                "programa":user.programa_id
+            }
+            console.log(datos);
+            // Creamos el arreglo que enviaremos
+            var json = [];
+            
+            // Metemos los datos en el paquete
+            json.push(datos)
 
-        // Creamos el arreglo que enviaremos
-        var json = [];
-        
-        // Metemos los datos en el paquete
-        json.push(datos)
-
-        //Enviamos json al servidor
-        fetch(url, {
-            method: 'POST',
-            body: JSON.stringify(json)
-        })
-            .then(res => res.json())
-            .then(
-                (data) => {
-                    var mensaje = "";
-                    if (data['nuevos'] == 0) {
-                        mensaje = `No se agrego el registro. Posible registro ya cargados anteriormente. Repetidos: ${data['repetidos']}`;
-                    } else if (data['nuevos'] != 0) {
-                        mensaje = `Terminado: registros nuevos: ${data['nuevos']}, repetidos: ${data['repetidos']},errores: ${data['errores']}`
+            //Enviamos json al servidor
+            fetch(url, {
+                method: 'POST',
+                mode:'cors',
+                body: JSON.stringify(datos)
+            })
+                .then(res => res.json())
+                .then(
+                    (data) => {
+                        var mensaje = "";
+                        if (data['nuevos'] == 0) {
+                            mensaje = `No agregado. Ya existe asistencia registrada en esa fecha.`;
+                        } else if (data['nuevos'] != 0) {
+                            mensaje = `Se agregó registro de asistencia correctamente`;
+                        }
+                        alert(mensaje);
                     }
-                    alert(mensaje);
-                }
-            );
+                );
+        }
     }
 
     onUserChange = (e) => {
@@ -125,7 +141,7 @@ class FormAddAssist extends React.Component {
                             </select>
                         </div>
                         <div className="form-item">
-                            <label>Seleccione la <br />fecha asistida: </label>
+                            <label>Seleccione la <br />fecha asistida <br/>(mm/dd/aaaa): </label>
                             <SingleDatePicker
                                 date={this.state.date}
                                 onDateChange={date => this.setState({ date })}

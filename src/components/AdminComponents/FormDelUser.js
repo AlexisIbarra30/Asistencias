@@ -1,4 +1,5 @@
 import React from 'react';
+import * as constantes from '../Constantes';
 
 export class FormModifUser extends React.Component{
 
@@ -7,8 +8,8 @@ export class FormModifUser extends React.Component{
         sendId:""
     }
 
-    getUsers = ()=>{
-        const url = 'http://localhost:8000/PAGINAS/backendIHM/usuarios.php';
+    componentDidMount = ()=>{
+        const url = `${constantes.PATH_API}usuarios.php`;
         fetch(url,{
             method:'GET',
             mode:'cors'
@@ -24,21 +25,20 @@ export class FormModifUser extends React.Component{
     }
 
     eliminarUser=()=>{
-        const url = 'http://localhost:8000/PAGINAS/backendIHM/usuarios.php?id='+this.state.sendId;
+        const url = `${constantes.PATH_API}usuarios.php?id=`+this.state.sendId;
         fetch(url,{
             method:'GET',
             mode:'cors'
         }).then(res=>res.text())
         .then(
             data=>{
-                this.getUsers();
+                this.componentDidMount();
                 alert("Eliminado correctamente");
             }
         );
     }
 
     render(){
-        this.getUsers();
         return(
             <div className="formDelUser">
                 <div className="form-header">
