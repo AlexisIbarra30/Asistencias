@@ -8,6 +8,7 @@ import FormDelUser from './AdminComponents/FormDelUser';
 import HelpPage from './AdminComponents/HelpPage';
 import Footer from './Footer';
 import FormModifFooter from './AdminComponents/FormModifFooter';
+import ProgramsPage from './AdminComponents/ProgramsPage';
 import {history} from '../routers/AppRouter';
 
 export default class AdminPage extends React.Component {
@@ -44,6 +45,7 @@ export default class AdminPage extends React.Component {
                         <MenuItem renderHandler={this.renderHandler} Component={FormModifUser} titulo="Modificar Usuario"/>
                         <MenuItem renderHandler={this.renderHandler} Component={FormDelUser} titulo="Eliminar Usuario"/>
                         <MenuItem renderHandler={this.renderHandler} Component={FormModifFooter} titulo="Modificar Pie de Pagina"/>
+                        <MenuItem renderHandler={this.renderHandler} Component={ProgramsPage} titulo="Programas"/>
                         <MenuItem renderHandler={this.renderHandler} Component={HelpPage} titulo="Ayuda"/>
                     </nav>
                     <div className='panel' id="panel">

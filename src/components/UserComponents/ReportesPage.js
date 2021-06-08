@@ -153,7 +153,7 @@ class ReportesPage extends React.Component {
                 <div className='titleContainer'>
                     <h1 className='title'> Reportes </h1>
                 </div>
-                <span style={{margin:10}}>** Solamente se muestran a los alumnos que pertenecen a la maestria/doctorador</span>
+                <span style={{margin:10}}>** Solamente se muestran a los alumnos que pertenecen a la maestria/doctorado</span>
 
                 <div className='panel123'>
                     <div className='container'>

@@ -20,8 +20,13 @@ export default class Header extends React.Component {
     };
 
     handleClose = () => {
-        sessionStorage.clear();
-        history.push('/');
+        let salir = confirm("¿Desea cerrar sesión?");
+
+        if(salir){
+            sessionStorage.clear();
+            history.push('/');
+        }
+        
     }
 
     render() {
