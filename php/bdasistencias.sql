@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 08-06-2021 a las 03:47:48
+-- Tiempo de generación: 17-06-2021 a las 18:35:04
 -- Versión del servidor: 10.4.11-MariaDB
 -- Versión de PHP: 7.4.2
 
@@ -93,7 +93,49 @@ INSERT INTO `asistencias2` (`id`, `nombre`, `apellidos`, `fecha`, `hora_entrada`
 (47, 'Fernando', 'Rebollar Castelan', '2019-02-26', '10:34:01', '17:40:48', '07:00:00', 1),
 (48, 'Eduardo', 'González Mora', '2019-02-26', '06:23:21', '12:27:28', '06:00:00', 2),
 (49, 'Eduardo', 'González Mora', '2019-03-01', '06:29:03', '10:36:16', '04:00:00', 2),
-(50, 'Francisco', 'Manzanarez Moronores', '2019-02-27', '10:17:52', '18:24:46', '08:00:00', 2);
+(50, 'Francisco', 'Manzanarez Moronores', '2019-02-27', '10:17:52', '18:24:46', '08:00:00', 2),
+(93, 'Francisco', 'Manzanarez Moronores', '2019-02-28', '11:37:34', '17:22:06', '06:00:00', 2),
+(94, 'Francisco', 'Manzanarez Moronores', '2019-03-01', '11:36:08', '18:04:52', '07:00:00', 2),
+(95, 'María Guadalupe', 'Martinez Jiménez', '2019-02-26', '08:23:06', '20:00:42', '12:00:00', 2),
+(96, 'María Guadalupe', 'Martinez Jiménez', '2019-02-27', '10:13:30', '20:56:07', '10:00:00', 2),
+(97, 'María Guadalupe', 'Martinez Jiménez', '2019-02-28', '13:47:28', '20:34:05', '07:00:00', 2),
+(98, 'Daniel', 'Mejía Pérez', '2019-02-25', '10:20:04', '19:02:29', '09:00:00', 2),
+(99, 'Daniel', 'Mejía Pérez', '2019-02-26', '09:24:12', '19:02:03', '10:00:00', 2),
+(100, 'Daniel', 'Mejía Pérez', '2019-02-27', '10:40:53', '18:22:31', '08:00:00', 2),
+(101, 'Daniel', 'Mejía Pérez', '2019-02-28', '10:52:59', '19:20:40', '09:00:00', 2),
+(102, 'Daniel', 'Mejía Pérez', '2019-03-01', '09:22:51', '19:14:26', '10:00:00', 2),
+(103, 'Daniela Monserrat', 'Ruiz Lopez', '2019-02-25', '09:05:34', '18:11:11', '09:00:00', 2),
+(104, 'Daniela Monserrat', 'Ruiz Lopez', '2019-02-26', '09:34:34', '17:56:27', '08:00:00', 2),
+(105, 'Daniela Monserrat', 'Ruiz Lopez', '2019-02-27', '09:14:18', '17:53:53', '08:00:00', 2),
+(106, 'Daniela Monserrat', 'Ruiz Lopez', '2019-03-01', '09:42:17', '18:03:24', '09:00:00', 2),
+(107, 'Benjamín', 'Sánchez Arena', '2019-02-26', '07:20:56', '16:11:37', '09:00:00', 2),
+(108, 'Benjamín', 'Sánchez Arena', '2019-02-27', '07:15:05', '18:16:01', '11:00:00', 2),
+(109, 'Juan Manuel', 'Zarza González', '2019-02-26', '10:33:33', '17:56:17', '07:00:00', 2),
+(110, 'Juan Manuel', 'Zarza González', '2019-02-27', '09:46:41', '18:39:13', '09:00:00', 2),
+(111, 'Juan Manuel', 'Zarza González', '2019-02-28', '10:24:21', '17:53:24', '07:00:00', 2),
+(112, 'Juan Manuel', 'Zarza González', '2019-03-01', '12:03:58', '15:42:46', '03:00:00', 2),
+(113, 'Miguel Ángel', 'Arana González', '2019-02-25', '09:27:35', '19:51:51', '10:00:00', 2),
+(114, 'Miguel Ángel', 'Arana González', '2019-02-26', '09:25:33', '17:06:39', '08:00:00', 2),
+(115, 'Miguel Ángel', 'Arana González', '2019-02-27', '08:02:05', '19:29:52', '11:00:00', 2),
+(116, 'Miguel Ángel', 'Arana González', '2019-02-28', '09:31:26', '16:47:26', '07:00:00', 2),
+(117, 'Miguel Ángel', 'Arana González', '2019-03-01', '09:33:28', '15:29:30', '06:00:00', 2),
+(118, 'Graciela', 'García Rueda', '2019-02-25', '09:36:27', '18:29:40', '09:00:00', 2),
+(119, 'Graciela', 'García Rueda', '2019-02-26', '10:04:11', '19:56:25', '09:00:00', 2),
+(120, 'Graciela', 'García Rueda', '2019-02-27', '09:46:32', '18:42:05', '09:00:00', 2),
+(121, 'Graciela', 'García Rueda', '2019-02-28', '09:34:20', '20:18:35', '11:00:00', 2),
+(122, 'Graciela', 'García Rueda', '2019-03-01', '09:36:43', '17:45:14', '08:00:00', 2),
+(123, 'Edgar', 'Jardón Torres', '2019-02-27', '07:03:10', '20:04:54', '13:00:00', 2),
+(124, 'Edgar', 'Jardón Torres', '2019-02-28', '07:05:02', '20:51:14', '13:00:00', 2),
+(125, 'Edgar', 'Jardón Torres', '2019-03-01', '06:54:45', '17:59:19', '11:00:00', 2),
+(126, 'Jose Luis', 'Medina Valdés', '2019-02-27', '11:27:17', '19:46:44', '08:00:00', 2),
+(127, 'Jose Luis', 'Medina Valdés', '2019-02-28', '09:47:10', '17:14:42', '08:00:00', 2),
+(128, 'Iván', 'Tellez Echeverri', '2019-02-25', '07:32:00', '16:37:56', '09:00:00', 2),
+(129, 'Iván', 'Tellez Echeverri', '2019-02-26', '07:23:56', '16:47:50', '09:00:00', 2),
+(130, 'Iván', 'Tellez Echeverri', '2019-02-27', '07:21:53', '17:26:33', '10:00:00', 2),
+(131, 'Iván', 'Tellez Echeverri', '2019-02-28', '07:26:56', '16:09:35', '09:00:00', 2),
+(132, 'Adriana', 'Ventolero Hernández', '2019-02-26', '09:10:52', '16:09:43', '07:00:00', 2),
+(133, 'Adriana', 'Ventolero Hernández', '2019-02-27', '07:59:01', '16:09:40', '09:00:00', 2),
+(134, 'Adriana', 'Ventolero Hernández', '2019-02-28', '07:53:03', '16:16:29', '09:00:00', 2);
 
 -- --------------------------------------------------------
 
@@ -105,7 +147,7 @@ CREATE TABLE `datos_footer` (
   `id` int(11) NOT NULL,
   `nombre` varchar(200) NOT NULL,
   `valor` varchar(200) NOT NULL,
-  `mostrar` bit(1) NOT NULL DEFAULT b'1'
+  `mostrar` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -113,15 +155,16 @@ CREATE TABLE `datos_footer` (
 --
 
 INSERT INTO `datos_footer` (`id`, `nombre`, `valor`, `mostrar`) VALUES
-(1, 'Sitio Web', 'Coordinación de Estudios Avanzados Facultad de Ingeniería.', b'1'),
-(2, 'Telefono de contacto', '(+52 722) 214 08 55 y 214 07 95. Ext. 1124', b'1'),
-(3, 'Correo Coordinación de Estudios Avanzados', 'cea-fi@outlook.com', b'1'),
-(4, 'Sistema de Información Científica REDALYC', 'http://www.redalyc.com/', b'1'),
-(5, 'CONACYT', 'http://www.conacyt.mx/', b'1'),
-(6, 'COMECYT', 'http://www.comecyt.edomex.gob.mx/', b'1'),
-(7, 'Repositorio institucional', 'http://ri.uaemex.mx/', b'1'),
-(8, 'Biblioteca Digital', 'http://bibliotecadigital.uaemex.mx/contador/basesdedatos1.php', b'1'),
-(9, 'Facebook', 'https://www.facebook.com/estudiosavanzados.fiuaem', b'1');
+(1, 'Sitio Web', 'Coordinación de Estudios Avanzados Facultad de Ingeniería.', 1),
+(2, 'Telefono de contacto', '(+52 722) 214 08 55 y 214 07 95. Ext. 1124', 1),
+(3, 'Correo Coordinación de Estudios Avanzados', 'cea-fi@outlook.com', 1),
+(4, 'Sistema de Información Científica REDALYC', 'http://www.redalyc.com/', 3),
+(5, 'CONACYT', 'http://www.conacyt.mx/', 3),
+(6, 'COMECYT', 'http://www.comecyt.edomex.gob.mx/', 3),
+(7, 'Repositorio institucional', 'http://ri.uaemex.mx/', 3),
+(9, 'Facebook', 'https://www.facebook.com/estudiosavanzados.fiuaem', 2),
+(18, 'Biblioteca Digital', 'http://bibliotecadigital.uaemex.mx/contador/basesdedatos1.php', 3),
+(21, 'Nuevo dato', 'informacion modificada', 1);
 
 -- --------------------------------------------------------
 
@@ -209,13 +252,13 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `asistencias2`
 --
 ALTER TABLE `asistencias2`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=93;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=135;
 
 --
 -- AUTO_INCREMENT de la tabla `datos_footer`
 --
 ALTER TABLE `datos_footer`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT de la tabla `programas`

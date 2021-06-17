@@ -28,29 +28,45 @@
 
 		case 'POST':
 			$_POST = json_decode(file_get_contents('php://input'),true);
-			$iteracion = 1;
 			$con = conectar();
-			$contador = 0;
+			$respuesta="";
 
-			while($iteracion <10){
-				//UPDATE `datos_footer` SET `nombre` = 'Sitio Web2', `valor` = 'Coordinación de Estudios Avanzados Facultad de Ingeniería', `mostrar` = b'1' WHERE `datos_footer`.`id` = 1 
-				
-				$nombre = "nombre".$iteracion;
-				$dato = "dato".$iteracion;
-				$query="";
-				if($iteracion!=9){
-					$query = "UPDATE datos_footer SET nombre = '".$_POST[$nombre]."' , valor='".$_POST[$dato]."' WHERE id='".$iteracion."' ";
-				}else{
-					$query = "UPDATE datos_footer SET valor='".$_POST[$dato]."' WHERE id='".$iteracion."' ";
-				}
 
+			//Si no define en que parte se mostrara significa que solo va a actualizar el campo
+			if(!isset($_POST['mostrar']) and !isset($_POST['eliminar'])){
+				$query = "UPDATE datos_footer SET nombre='".$_POST['nombre']."', valor='".$_POST['valor']."' WHERE id='".$_POST['bdid']."'";
 				if(mysqli_query($con,$query)){
-					$contador = $contador +1;
+					$respuesta="correcto";
+				}else{
+					$respuesta="error";
+				}
+
+			}else if(isset($_POST['mostrar'])){
+				$query = "SELECT * from datos_footer WHERE nombre like '".$_POST['nombre']."' or valor like '".$_POST['valor']."'";
+				$res = mysqli_query($con,$query);
+				$respuesta="";
+
+				if(mysqli_num_rows($res)==0){
+					$query = "INSERT INTO datos_footer(nombre,valor,mostrar) VALUES('".$_POST['nombre']."','".$_POST['valor']."','".$_POST['mostrar']."')";
+					if(mysqli_query($con,$query)){
+						$respuesta="correcto";
+					}
+				}else{
+					$respuesta="repetido";
 				}
 				
-				$iteracion = $iteracion + 1;
+
 			}
-			echo $contador;
+			else if($_POST['eliminar']){
+				$query = "DELETE from datos_footer where id='".$_POST['bdid']."'";
+				mysqli_query($con,$query);
+				$respuesta="eliminado";
+
+			}
+
+			mysqli_close($con);
+			echo $respuesta;
+			
 
 		break;
 
