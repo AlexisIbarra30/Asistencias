@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev-server": "webpack serve",
-    "build": "webpack --watch",
+    "build": "webpack",
     "build-babel": "babel src/app.js --out-file=public/scripts/app.js --presets='env,react' --watch"
   },
   "keywords": [],
@@ -33,6 +33,7 @@
     "react-bootstrap": "^1.6.0",
     "react-dates": "^21.8.0",
     "react-dom": "^17.0.1",
+    "react-google-recaptcha": "^2.1.0",
     "react-modal": "^3.12.1",
     "react-redux": "^7.2.3",
     "react-router-dom": "^5.2.0",
