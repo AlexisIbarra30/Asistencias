@@ -1,8 +1,9 @@
 {
-  "name": "indecision-app",
+  "name": "Sistema de Asistencias",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "app.js",
+  "homepage": "http://148.215.30.245/sisAsisPos/",
   "scripts": {
     "dev-server": "webpack serve",
     "build": "webpack",
