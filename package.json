@@ -3,9 +3,8 @@
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
-  "homepage": "http://148.215.30.245/sisAsisPos/",
   "scripts": {
-    "dev-server": "webpack serve",
+    "start": "webpack serve",
     "build": "webpack",
     "build-babel": "babel src/app.js --out-file=public/scripts/app.js --presets='env,react' --watch"
   },

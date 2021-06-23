@@ -52,9 +52,6 @@ export default class Header extends React.Component {
                     <p className='logoutText'>Bienvenido de vuelta: {this.state.name}</p>
                 </div>
                 <div className='logoutItem'>
-                    <span class="logoutText">{this.state.programa}</span>
-                </div>
-                <div className='logoutItem'>
                     <button onClick={this.handleClose} className='headerImages'><img className='headerImages' src='./images/logout.svg' /></button>
                     <p onClick={this.handleClose} className='logoutText'>Cerrar sesion</p>
                 </div>  

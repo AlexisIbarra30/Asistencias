@@ -11,8 +11,19 @@ import {history} from '../routers/AppRouter';
 export default class UserPage extends React.Component {
 
     state = {
-        renderComponent: RegisterPage
+        renderComponent: RegisterPage,
+        name: undefined,
+        programa: undefined
     }
+
+    componentDidMount() {
+        this.getUserName();
+    }
+
+    getUserName = () => {
+        let user = JSON.parse(sessionStorage.getItem("USER"));
+        this.setState(() => ({name: user.nombre, programa: user.programa}));
+    };
 
     renderHandler = (renderComponent) => {
         this.setState(() => ({
@@ -33,7 +44,7 @@ export default class UserPage extends React.Component {
         return (
             <div>
                 <Header />
-                <h1 className='title'> Panel de Usuario </h1>
+                <h1 className='title' style={{color:'#27823F', fontSize: 30, marginTop: 60, marginBottom: 25}}> Panel de Coordinador: {this.state.programa}</h1>
                 <div className="container">
                     <nav className="menu-navegacion">
                         <MenuItem renderHandler={this.renderHandler} Component={RegisterPage} titulo="Cargar Archivo Asistencias" />

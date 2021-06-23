@@ -1,16 +1,16 @@
 import React from 'react';
 import * as constantes from '../Constantes';
 
-export class FormAddUser extends React.Component{
-    
+export class FormAddUser extends React.Component {
+
     state = {
-        nombre:"",
-        apellidos:"",
-        usuario:"",
-        password:"",
-        tipo_usuario:"",
-        programa:1,
-        tipo_programa:[]
+        nombre: "",
+        apellidos: "",
+        usuario: "",
+        password: "",
+        tipo_usuario: "",
+        programa: 1,
+        tipo_programa: []
     }
 
     //Captura de datos 
@@ -38,52 +38,52 @@ export class FormAddUser extends React.Component{
         }))
     }
     //Funcion para agregar usuarios
-    addNewUser = () =>{
+    addNewUser = () => {
         const json = {
-            nombre:this.state.nombre,
-            apellidos:this.state.apellidos,
-            usuario:this.state.usuario,
-            password:this.state.password,
-            tipo_usuario:this.state.tipo_usuario,
-            programa:this.state.programa
+            nombre: this.state.nombre,
+            apellidos: this.state.apellidos,
+            usuario: this.state.usuario,
+            password: this.state.password,
+            tipo_usuario: this.state.tipo_usuario,
+            programa: this.state.programa
         }
-        
-        if(json.nombre.trim()=="" || json.apellidos.trim()=="" || json.usuario.trim()==""||json.password.trim()==""||json.tipo_usuario==null){
+
+        if (json.nombre.trim() == "" || json.apellidos.trim() == "" || json.usuario.trim() == "" || json.password.trim() == "" || json.tipo_usuario == null) {
             alert("Por favor no dejar campos en blanco");
-        }else{
+        } else {
             const url = `${constantes.PATH_API}usuarios.php`;
-            fetch(url,{
-                method:'POST',
+            fetch(url, {
+                method: 'POST',
                 body: JSON.stringify(json)
             })
-            .then(res=>res.text())
-            .then(
-                (data) =>{
-                    var mensaje="";
-                    console.log(data);
-                    if(data==="correcto"){
-                        mensaje="Agregado correctamente";
-                    }else{
-                        mensaje="Ya existe cuenta para "+this.state.nombre+" "+this.state.apellidos;
+                .then(res => res.text())
+                .then(
+                    (data) => {
+                        var mensaje = "";
+                        console.log(data);
+                        if (data === "correcto") {
+                            mensaje = "Agregado correctamente";
+                        } else {
+                            mensaje = "Ya existe cuenta para " + this.state.nombre + " " + this.state.apellidos;
+                        }
+                        alert(mensaje);
                     }
-                    alert(mensaje);
-                }
 
-            );
+                );
         }
     }
 
 
     //Para llenar combo de programas
-    componentDidMount = ()=>{
+    componentDidMount = () => {
         const url = `${constantes.PATH_API}programas.php`;
-        fetch(url,{
-            method:'GET',
-            mode:'cors'
+        fetch(url, {
+            method: 'GET',
+            mode: 'cors'
         }).then(response => response.json())
-        .then(data=>{
-            this.setState(()=>({tipo_programa:data}));
-        });
+            .then(data => {
+                this.setState(() => ({ tipo_programa: data }));
+            });
     }
 
     //Obtener valor del combobox
@@ -93,9 +93,9 @@ export class FormAddUser extends React.Component{
     }
 
 
-    render(){
-      
-        return(
+    render() {
+
+        return (
             <div className="formAddUser">
                 <h3>Nuevo Usuario </h3>
                 <div className="form-item morespace">
@@ -121,25 +121,24 @@ export class FormAddUser extends React.Component{
                             <input type="radio" value="0" defaultChecked name="tipo-usuario" onClick={() => { this.handleTypeUser(0) }} ></input>
                             <label>Usuario</label>
                         </div>
-                       
                         <div className="radio-item">
                             <input type="radio" value="1" name="tipo-usuario" onClick={() => { this.handleTypeUser(1) }}></input>
                             <label>Administardor</label>
                         </div>
                     </div>
                 </div>
-                <br/>
+                <br />
                 <div className="buscaUser morespace">
-                        <label className="morespace">Selecciona un programa: </label>
-                        <select name="tipo-programa" className="morespace" onChange={this.onProgramaChange}>
-                            {this.state.tipo_programa.map(
-                                (tipo,index)=>{
-                                    return(<option key={index} value={tipo.id} >{`${tipo.programa_nombre}`}</option>);
-                                }
-                            )
+                    <label className="morespace">Selecciona un programa: </label>
+                    <select name="tipo-programa" className="morespace" onChange={this.onProgramaChange}>
+                        {this.state.tipo_programa.map(
+                            (tipo, index) => {
+                                return (<option key={index} value={tipo.id} >{`${tipo.programa_nombre}`}</option>);
                             }
-                        </select>
-                </div>          
+                        )
+                        }
+                    </select>
+                </div>
 
                 <div className="btnBox smallbtn morespace">
                     <button className="registerBack nomargin" onClick={this.addNewUser}>Registrar</button>

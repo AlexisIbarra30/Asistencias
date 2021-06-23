@@ -13,12 +13,20 @@ class ReportesPage extends React.Component {
         endDate: moment(),
         focusedInput: null,
         fchI: undefined,
-        fchF: undefined
+        fchF: undefined,
+        name: undefined,
+        programa: undefined
     }
 
     componentDidMount() {
         this.getRegistros();
+        this.getUserName();
     }
+
+    getUserName = () => {
+        let user = JSON.parse(sessionStorage.getItem("USER"));
+        this.setState(() => ({name: user.nombre, programa: user.programa}));
+    };
 
     getRegistros = () => {
         // LLenamos el JSON de la solicitud
@@ -26,12 +34,12 @@ class ReportesPage extends React.Component {
         let cadena = JSON.stringify(moment(this.state.startDate._d, "YYYY-MM-DD")._i);
         cadena = cadena.split("T");
         cadena = JSON.stringify(cadena[0]).split("\"")
-        let fecha_inicio = cadena[2]
+        let fecha_inicio = cadena[2];
 
         let cadena2 = JSON.stringify(moment(this.state.endDate._d, "YYYY-MM-DD")._i);
         cadena2 = cadena2.split("T");
         cadena2 = JSON.stringify(cadena2[0]).split("\"")
-        let fecha_fin = cadena2[2]
+        let fecha_fin = cadena2[2];
 
         this.setState(() => ({
             fchI: fecha_inicio,
@@ -77,7 +85,7 @@ class ReportesPage extends React.Component {
         // Creamos nuestro documento pdf
         let image = "./images/logo.png";
         let x = 20;
-        let y = 10;
+        let y = 0;
         let width = 70;
         let height = 25;
         let doc = new jsPDF();
@@ -106,7 +114,8 @@ class ReportesPage extends React.Component {
         //fondo: #2D5438
         //texto: #FFFFFF
         doc.setFontSize(18);
-        doc.text(`Cordinacion de Estudios Avanzados`, 50,50);
+        doc.text(`Cordinacion de Estudios Avanzados`, 50,40);
+        doc.text(this.state.programa, 50,50);
         doc.text(`Registro de asistencias, de ${this.state.fchI} hasta ${this.state.fchF}`, 30,60);
         doc.setFontSize(10);
         //doc.cell(5, 70, 200, 300,'  Nombre        Apellidos            Fecha Inicio      Fecha Final      Horas Totales  ', 1);
@@ -171,7 +180,6 @@ class ReportesPage extends React.Component {
                                 focusedInput={this.state.focusedInput} // PropTypes.oneOf([START_DATE, END_DATE]) or null,
                                 onFocusChange={focusedInput => this.setState({ focusedInput })} // PropTypes.func.isRequired,
                                 isOutsideRange={() => false}
-                                noBorder={true}
                                 readOnly={true}
                             />
                         </div>
