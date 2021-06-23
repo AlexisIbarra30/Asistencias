@@ -68,9 +68,11 @@ export class FormModifUser extends React.Component{
         const apellidos= this.buscarDato(sendId,this.state.usuarios).apellidos;
         const usuario = this.buscarDato(sendId,this.state.usuarios).usuario;
         const password = this.buscarDato(sendId,this.state.usuarios).password;
-        const tipo_usuario = this.buscarDato(sendId,this.state.usuarios).tipo_usuario
+        const tipo_usuario = this.buscarDato(sendId,this.state.usuarios);
+        this.setState(()=>({sendId:sendId,nombre:nombre,apellidos:apellidos,usuario:usuario,password:password}));
+        this.setState(()=>{tipo_usuario});
 
-        this.setState(()=>({sendId:sendId,nombre:nombre,apellidos:apellidos,usuario:usuario,password:password,tipo_usuario:tipo_usuario}));
+
     }
 
     modificaUser = ()=>{
@@ -144,12 +146,12 @@ export class FormModifUser extends React.Component{
                         <label>Tipo de usuario: </label>
                         <div className="radios">
                             <div className="radio-item">
-                                <input type="radio" defaultChecked value="0" name="tipo-usuario" onClick={() => { this.handleTypeUser(0) }}></input>
+                                <input type="radio" value="0" name="tipo-usuario" onClick={() => { this.handleTypeUser(0) }} id="radio0"></input>
                                 <label>Usuario</label>
                             </div>
                         
                             <div className="radio-item">
-                                <input type="radio" value="1" name="tipo-usuario" onClick={() => { this.handleTypeUser(1) }}></input>
+                                <input type="radio" value="1" name="tipo-usuario" onClick={() => { this.handleTypeUser(1) }} id="radio1"></input>
                                 <label>Administardor</label>
                             </div>
                         </div>

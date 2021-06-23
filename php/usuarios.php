@@ -29,7 +29,7 @@
 			$_POST = json_decode(file_get_contents('php://input'),true);
 			$json = array();
 
-			if(isset($_POST['nombre']) and isset($_POST['apellidos']) and isset($_POST['usuario']) and isset($_POST['password']) and isset($_POST['tipo_usuario']) and isset($_POST['programa'])){
+			if(isset($_POST['nombre']) and isset($_POST['apellidos']) and isset($_POST['usuario']) and isset($_POST['password']) and isset($_POST['tipo_usuario']) ){
 				$con = conectar();
 
 				//verificamos que no exista ya el usuario (ver si no se repite el nombre o el usuario)
@@ -107,7 +107,7 @@
 			else{
 				//Si no viene ninguna variable, devolver todos los usuarios
 				$con = conectar();
-				$query ="SELECT usuarios.id as id,nombre,apellidos,usuario,programa_nombre,password from usuarios inner join programas where programas.id = usuarios.programa";
+				$query ="SELECT usuarios.id as id,nombre,apellidos,usuario,programa_nombre,password,tipo_usuario from usuarios inner join programas where programas.id = usuarios.programa";
 				$json = array();
 
 				$res = mysqli_query($con,$query);
