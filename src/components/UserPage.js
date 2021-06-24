@@ -5,6 +5,8 @@ import MenuItem from './MenuItem';
 import RegisterPage from './UserComponents/RegisterPage';
 import FormAddAssist from './UserComponents/FormAddAssist';
 import ReportesPage from './UserComponents/ReportesPage';
+import FormModifUser from './UserComponents/FormModifUser';
+import HelpPage from './UserComponents/HelpPage';
 import Footer from './Footer';
 import {history} from '../routers/AppRouter';
 
@@ -47,9 +49,11 @@ export default class UserPage extends React.Component {
                 <h1 className='title' style={{color:'#27823F', fontSize: 30, marginTop: 60, marginBottom: 25}}> Panel de Coordinador: {this.state.programa}</h1>
                 <div className="container">
                     <nav className="menu-navegacion">
-                        <MenuItem renderHandler={this.renderHandler} Component={RegisterPage} titulo="Cargar Archivo Asistencias" />
-                        <MenuItem renderHandler={this.renderHandler} Component={FormAddAssist} titulo="Registrar Asistencia" />
-                        <MenuItem renderHandler={this.renderHandler} Component={ReportesPage} titulo="Generar Reportes" />
+                        <MenuItem renderHandler={this.renderHandler} Component={RegisterPage} titulo="Cargar Archivo Asistencias " />
+                        <MenuItem renderHandler={this.renderHandler} Component={FormAddAssist} titulo="Registrar Asistencia " />
+                        <MenuItem renderHandler={this.renderHandler} Component={ReportesPage} titulo="Generar Reportes " />
+                        <MenuItem renderHandler={this.renderHandler} Component={FormModifUser} titulo="Perfil de Usuario " />
+                        <MenuItem renderHandler={this.renderHandler} Component={HelpPage} titulo="Ayuda " />
                     </nav>
                     <div className='Panel'>
                         <this.state.renderComponent/>

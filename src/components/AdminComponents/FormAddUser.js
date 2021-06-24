@@ -107,7 +107,7 @@ export class FormAddUser extends React.Component {
                     <input type='text' id="apellidos" name="apellidos" onChange={this.onApellidosChange} value={this.state.apellidos}></input>
                 </div>
                 <div className="form-item morespace">
-                    <label>Nombre de usuario: </label>
+                    <label>Usuario: </label>
                     <input type='text' id="usuario" name="usuario" onChange={this.onUsuarioChange} value={this.state.usuario}></input>
                 </div>
                 <div className="form-item">

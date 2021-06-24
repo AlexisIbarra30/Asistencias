@@ -1,7 +1,7 @@
 const path = require('path');
 
 module.exports = {
-    mode: 'development',
+    mode: 'production',
     entry: './src/app.js',
     output: {
         path: path.resolve(__dirname, 'public'),
@@ -17,7 +17,7 @@ module.exports = {
             use: ['style-loader', 'css-loader', 'sass-loader']
         }]
     },
-    //devtool: 'source-map',
+    devtool: 'source-map',
     devServer: {
         contentBase: path.resolve(__dirname, 'public'),
         historyApiFallback: true

@@ -13,15 +13,15 @@ export class FormModifUser extends React.Component{
         sendId:""
     }
 
-    componentDidMount = ()=>{
+    componentDidMount() {
         const url = `${constantes.PATH_API}usuarios.php`;
         fetch(url,{
             method:'GET',
             mode:'cors'
         }).then(response => response.json())
         .then(data=>{
+            console.log(data);
             this.setState(()=>({usuarios:data}))
-            
         });
         
     }
