@@ -8,7 +8,7 @@ export class FormAddUser extends React.Component {
         apellidos: "",
         usuario: "",
         password: "",
-        tipo_usuario: "",
+        tipo_usuario: "0",
         programa: 1,
         tipo_programa: []
     }
@@ -33,6 +33,7 @@ export class FormAddUser extends React.Component {
         this.setState(() => ({ usuario }))
     }
     handleTypeUser = (tipo_usuario) => {
+        console.log(tipo_usuario);
         this.setState(() => ({
             tipo_usuario
         }))
